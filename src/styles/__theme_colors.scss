@@ -2,42 +2,53 @@
 
 // THEME PALETTE 10 indigo-coolGrey ==========================================
 :root {
-  // PRIMARY COLOR
-  // Gold palette (match logo)
-  --c-primary-50: 255, 251, 235;
-  --c-primary-100: 254, 243, 199;
-  --c-primary-200: 253, 230, 138;
-  --c-primary-300: 252, 211, 77;
-  --c-primary-400: 251, 191, 36;
-  --c-primary-500: 245, 158, 11;
-  --c-primary-600: 217, 119, 6;
-  --c-primary-700: 180, 83, 9;
-  --c-primary-800: 146, 64, 14;
-  --c-primary-900: 120, 53, 15;
+  // PRIMARY COLOR - Orange Brown (Nâu cam)
+  --c-primary-50: 254, 251, 232;
+  --c-primary-100: 253, 242, 191;
+  --c-primary-200: 251, 228, 141;
+  --c-primary-300: 248, 206, 85;
+  --c-primary-400: 244, 178, 41;
+  --c-primary-500: 228, 137, 18;  // Nâu cam sáng (Orange-Brown)
+  --c-primary-600: 197, 102, 12;  // Nâu cam
+  --c-primary-700: 161, 76, 11;   // Nâu cam đậm
+  --c-primary-800: 128, 58, 12;
+  --c-primary-900: 104, 48, 12;
 
-  // SECONDARY COLOR
-  --c-secondary-50: 240, 253, 250;
-  --c-secondary-100: 204, 251, 241;
-  --c-secondary-200: 153, 246, 228;
-  --c-secondary-300: 153, 246, 228;
-  --c-secondary-400: 45, 212, 191;
-  --c-secondary-500: 20, 184, 166;
-  --c-secondary-600: 13, 148, 136;
-  --c-secondary-700: 15, 118, 110;
-  --c-secondary-800: 17, 94, 89;
-  --c-secondary-900: 19, 78, 74;
+  // SECONDARY COLOR - Brown (Nâu)
+  --c-secondary-50: 245, 240, 235;
+  --c-secondary-100: 235, 225, 213;
+  --c-secondary-200: 219, 203, 184;
+  --c-secondary-300: 201, 175, 149;
+  --c-secondary-400: 181, 145, 115;
+  --c-secondary-500: 139, 90, 43; // Saddle Brown
+  --c-secondary-600: 112, 70, 31;
+  --c-secondary-700: 89, 54, 22;
+  --c-secondary-800: 71, 42, 17;
+  --c-secondary-900: 56, 32, 12;
 
-  // NEUTRAL COLOR
-  --c-neutral-50: 249, 250, 251;
-  --c-neutral-100: 243, 244, 246;
-  --c-neutral-200: 229, 231, 235;
-  --c-neutral-300: 209, 213, 219;
-  --c-neutral-400: 156, 163, 175;
-  --c-neutral-500: 107, 114, 128;
-  --c-neutral-600: 75, 85, 99;
-  --c-neutral-700: 55, 65, 81;
-  --c-neutral-800: 31, 41, 55;
-  --c-neutral-900: 17, 24, 39;
+  // NEUTRAL COLOR - Warm off-white to deep dark brown (Trắng/Nâu xám)
+  --c-neutral-50: 255, 255, 255;  // Trắng
+  --c-neutral-100: 250, 249, 248;
+  --c-neutral-200: 242, 239, 237;
+  --c-neutral-300: 228, 224, 221;
+  --c-neutral-400: 198, 191, 187;
+  --c-neutral-500: 153, 145, 140;
+  --c-neutral-600: 115, 107, 102;
+  --c-neutral-700: 84, 77, 72;
+  --c-neutral-800: 58, 53, 50;
+  --c-neutral-900: 38, 35, 33;
+  
+  // ACCENT COLOR - Green (Xanh lá)
+  --c-accent-50: 239, 253, 244;
+  --c-accent-100: 220, 252, 231;
+  --c-accent-200: 187, 247, 208;
+  --c-accent-300: 134, 239, 172;
+  --c-accent-400: 74, 222, 128;
+  --c-accent-500: 34, 197, 94;   // Green
+  --c-accent-600: 22, 163, 74;
+  --c-accent-700: 21, 128, 61;
+  --c-accent-800: 22, 101, 52;
+  --c-accent-900: 20, 83, 45;
 }
 
 // THEME PALETTE 1 ==========================================

@@ -34,7 +34,7 @@ export default function ListingStayPage() {
             </p>
             <Link
               href="/listing-stay-detail"
-              className="inline-block mt-4 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium"
+              className="inline-block mt-4 px-4 py-2 rounded-lg bg-primary-500 hover:bg-primary-600 text-white text-sm font-medium transition-colors"
             >
               Xem chi tiết & đặt phòng
             </Link>

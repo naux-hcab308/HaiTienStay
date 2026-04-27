@@ -12,11 +12,6 @@ const blogChildren: NavItemType[] = [
     href: "/about",
     name: "Giới thiệu homestay",
   },
-  {
-    id: ncNanoId(),
-    href: "/contact",
-    name: "Liên hệ",
-  },
 ];
 
 export const NAVIGATION_DEMO: NavItemType[] = [
@@ -42,6 +37,16 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     type: "dropdown",
     children: blogChildren,
   },
+  {
+    id: ncNanoId(),
+    href: "/tuyen-dung",
+    name: "Tuyển dụng",
+  },
+  {
+    id: ncNanoId(),
+    href: "/contact",
+    name: "Liên hệ",
+  },
 ];
 
 export const NAVIGATION_DEMO_2: NavItemType[] = [
@@ -65,5 +70,15 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
     href: "/blog",
     name: "Blog trải nghiệm",
     children: blogChildren,
+  },
+  {
+    id: ncNanoId(),
+    href: "/tuyen-dung",
+    name: "Tuyển dụng",
+  },
+  {
+    id: ncNanoId(),
+    href: "/contact",
+    name: "Liên hệ",
   },
 ];

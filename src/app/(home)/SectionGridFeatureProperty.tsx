@@ -5,8 +5,18 @@ import ButtonPrimary from "@/shared/ButtonPrimary";
 import PropertyCardH from "@/components/PropertyCardH";
 import HeaderFilter from "@/components/HeaderFilter";
 
-// OTHER DEMO WILL PASS PROPS
-const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
+const ROOM_TYPES = [
+  "Phòng đôi",
+  "Phòng 3 người",
+  "Phòng 4 người",
+  "Phòng 6 người",
+  "Phòng 8 người",
+];
+
+const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 5).map((item, index) => ({
+  ...item,
+  title: ROOM_TYPES[index],
+}));
 //
 export interface SectionGridFeaturePropertyProps {
   stayListing?: StayDataType[];
@@ -20,10 +30,10 @@ export interface SectionGridFeaturePropertyProps {
 const SectionGridFeatureProperty: FC<SectionGridFeaturePropertyProps> = ({
   stayListing = DEMO_DATA,
   gridClass = "",
-  heading = "Featured places to stay",
-  subHeading = "Popular places to stay that Chisfis recommends for you",
+  heading = "Danh sách các hạng phòng",
+  subHeading = "Chọn không gian phù hợp nhất cho chuyến đi của bạn",
   headingIsCenter,
-  tabs = ["New York", "Tokyo", "Paris", "London"],
+  tabs = [],
 }) => {
   const renderCard = (stay: StayDataType, index: number) => {
     return <PropertyCardH key={index} className="h-full" data={stay} />;
@@ -32,7 +42,7 @@ const SectionGridFeatureProperty: FC<SectionGridFeaturePropertyProps> = ({
   return (
     <div className="nc-SectionGridFeatureProperty relative">
       <HeaderFilter
-        tabActive={"New York"}
+        tabActive={""}
         subHeading={subHeading}
         tabs={tabs}
         heading={heading}
@@ -41,9 +51,6 @@ const SectionGridFeatureProperty: FC<SectionGridFeaturePropertyProps> = ({
         className={`grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-1 xl:grid-cols-2 ${gridClass}`}
       >
         {stayListing.map(renderCard)}
-      </div>
-      <div className="flex mt-16 justify-center items-center">
-        <ButtonPrimary loading>Show me more</ButtonPrimary>
       </div>
     </div>
   );

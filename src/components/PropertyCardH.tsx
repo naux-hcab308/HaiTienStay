@@ -86,6 +86,13 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
   };
 
   const renderContent = () => {
+    let tagText = "Family";
+    let iconClass = "las la-user-friends";
+    if (title.includes("đôi")) {
+      tagText = "Couple";
+      iconClass = "las la-user";
+    }
+
     return (
       <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
         <div className="space-y-4 w-full">
@@ -93,16 +100,8 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             <Badge
               name={
                 <div className="flex items-center">
-                  <i className="text-sm las la-share-alt"></i>
-                  <span className="ml-1">4 Network</span>
-                </div>
-              }
-            />
-            <Badge
-              name={
-                <div className="flex items-center">
-                  <i className="text-sm las la-user-friends"></i>
-                  <span className="ml-1">Family</span>
+                  <i className={`text-sm ${iconClass}`}></i>
+                  <span className="ml-1">{tagText}</span>
                 </div>
               }
               color="yellow"

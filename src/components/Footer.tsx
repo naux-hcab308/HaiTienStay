@@ -99,6 +99,12 @@ const Footer: React.FC = () => {
           </div>
           {widgetMenus.map(renderWidgetMenuItem)}
         </div>
+
+        <div className="container mt-16 pt-8 flex items-center justify-center border-t border-neutral-200 dark:border-neutral-700">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            @edit by YoungHouse Dev Team
+          </p>
+        </div>
       </div>
     </>
   );
