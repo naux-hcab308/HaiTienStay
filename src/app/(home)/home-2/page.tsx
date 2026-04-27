@@ -38,7 +38,7 @@ import Image from "next/image";
 const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "1",
-    href: "/listing-real-estate",
+    href: "/home",
     name: "Enjoy the great cold",
     taxonomy: "category",
     count: 188288,
@@ -47,7 +47,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   },
   {
     id: "2",
-    href: "/listing-real-estate",
+    href: "/home",
     name: "Sleep in a floating way",
     taxonomy: "category",
     count: 188288,
@@ -56,7 +56,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   },
   {
     id: "3",
-    href: "/listing-real-estate",
+    href: "/home",
     name: "In the billionaire's house",
     taxonomy: "category",
     count: 188288,
@@ -65,7 +65,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   },
   {
     id: "4",
-    href: "/listing-real-estate",
+    href: "/home",
     name: "Cool in the deep forest",
     taxonomy: "category",
     count: 188288,
@@ -74,7 +74,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   },
   {
     id: "5",
-    href: "/listing-real-estate",
+    href: "/home",
     name: "In the billionaire's house",
     taxonomy: "category",
     count: 188288,
@@ -83,7 +83,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   },
   {
     id: "6",
-    href: "/listing-real-estate",
+    href: "/home",
     name: "Sleep in a floating way",
     taxonomy: "category",
     count: 188288,
@@ -92,7 +92,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   },
   {
     id: "7",
-    href: "/listing-real-estate",
+    href: "/home",
     name: "In the billionaire's house",
     taxonomy: "category",
     count: 188288,

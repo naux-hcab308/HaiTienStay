@@ -242,13 +242,13 @@ export const NAVIGATION_DEMO: NavItemType[] = [
       //
       {
         id: ncNanoId(),
-        href: "/listing-real-estate",
+        href: "/home",
         name: "Real Estate Listings",
         type: "dropdown",
         children: [
           {
             id: ncNanoId(),
-            href: "/listing-real-estate",
+            href: "/home",
             name: "Real Estate Listings",
           },
           {
@@ -337,7 +337,7 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
       //
       {
         id: ncNanoId(),
-        href: "/listing-real-estate",
+        href: "/home",
         name: "Real estate listings",
       },
       {

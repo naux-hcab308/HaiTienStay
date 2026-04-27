@@ -25,7 +25,7 @@ const solutions: SolutionItem[] = [
   {
     name: "Real Estate",
     description: "Real Estate description",
-    href: "/listing-real-estate",
+    href: "/home",
     icon: IconTwo,
   },
   {

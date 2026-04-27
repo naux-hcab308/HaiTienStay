@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 const PAGES_REAL_ESTATE: PathName[] = [
   "/home-2",
-  "/listing-real-estate",
+  "/home",
   "/listing-real-estate-map",
 ];
 
