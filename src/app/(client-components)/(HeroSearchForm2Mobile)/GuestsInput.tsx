@@ -15,24 +15,24 @@ const GuestsInput: FC<GuestsInputProps> = ({
   onChange,
   className = "",
 }) => {
-  const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(
+  const [guestAdultsInputValue, setGuestsAdultsInputValue] = useState(
     defaultValue?.guestAdults || 0
   );
-  const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(
+  const [guestChildrenInputValue, setGuestsChildrenInputValue] = useState(
     defaultValue?.guestChildren || 0
   );
-  const [guestInfantsInputValue, setGuestInfantsInputValue] = useState(
+  const [guestInfantsInputValue, setGuestsInfantsInputValue] = useState(
     defaultValue?.guestInfants || 0
   );
 
   useEffect(() => {
-    setGuestAdultsInputValue(defaultValue?.guestAdults || 0);
+    setGuestsAdultsInputValue(defaultValue?.guestAdults || 0);
   }, [defaultValue?.guestAdults]);
   useEffect(() => {
-    setGuestChildrenInputValue(defaultValue?.guestChildren || 0);
+    setGuestsChildrenInputValue(defaultValue?.guestChildren || 0);
   }, [defaultValue?.guestChildren]);
   useEffect(() => {
-    setGuestInfantsInputValue(defaultValue?.guestInfants || 0);
+    setGuestsInfantsInputValue(defaultValue?.guestInfants || 0);
   }, [defaultValue?.guestInfants]);
 
   const handleChangeData = (value: number, type: keyof GuestsObject) => {
@@ -42,15 +42,15 @@ const GuestsInput: FC<GuestsInputProps> = ({
       guestInfants: guestInfantsInputValue,
     };
     if (type === "guestAdults") {
-      setGuestAdultsInputValue(value);
+      setGuestsAdultsInputValue(value);
       newValue.guestAdults = value;
     }
     if (type === "guestChildren") {
-      setGuestChildrenInputValue(value);
+      setGuestsChildrenInputValue(value);
       newValue.guestChildren = value;
     }
     if (type === "guestInfants") {
-      setGuestInfantsInputValue(value);
+      setGuestsInfantsInputValue(value);
       newValue.guestInfants = value;
     }
     onChange && onChange(newValue);

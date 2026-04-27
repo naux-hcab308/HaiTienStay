@@ -22,7 +22,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
   data = NAVIGATION_DEMO,
   onClickClose,
 }) => {
-  const _renderMenuChild = (item: NavItemType) => {
+  const _renderMenuChildren = (item: NavItemType) => {
     return (
       <ul className="nav-mobile-sub-menu pl-6 pb-1 text-base">
         {item.children?.map((i, index) => (
@@ -56,7 +56,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
               )}
             </Link>
             {i.children && (
-              <Disclosure.Panel>{_renderMenuChild(i)}</Disclosure.Panel>
+              <Disclosure.Panel>{_renderMenuChildren(i)}</Disclosure.Panel>
             )}
           </Disclosure>
         ))}
@@ -97,7 +97,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
           )}
         </Link>
         {item.children && (
-          <Disclosure.Panel>{_renderMenuChild(item)}</Disclosure.Panel>
+          <Disclosure.Panel>{_renderMenuChildren(item)}</Disclosure.Panel>
         )}
       </Disclosure>
     );

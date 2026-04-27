@@ -354,7 +354,7 @@ const ListingExperiencesDetailPage: FC<
 
         {/* CONTENT */}
         <div>
-          <h4 className="text-lg font-semibold">Guest requirements</h4>
+          <h4 className="text-lg font-semibold">Guests requirements</h4>
           <span className="block mt-3 text-neutral-500 dark:text-neutral-400">
             Up to 10 guests ages 4 and up can attend. Parents may also bring
             children under 2 years of age.

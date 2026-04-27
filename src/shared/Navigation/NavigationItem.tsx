@@ -162,7 +162,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
                 <ul className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10 text-sm relative bg-white dark:bg-neutral-900 py-4 grid space-y-1">
                   {menuDropdown.children?.map((i) => {
                     if (i.type) {
-                      return renderDropdownMenuNavlinkHasChild(i);
+                      return renderDropdownMenuNavlinkHasChildren(i);
                     } else {
                       return (
                         <li
@@ -183,7 +183,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
     );
   };
 
-  const renderDropdownMenuNavlinkHasChild = (item: NavItemType) => {
+  const renderDropdownMenuNavlinkHasChildren = (item: NavItemType) => {
     const isHover = menuCurrentHovers.includes(item.id);
     return (
       <Popover
@@ -213,7 +213,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
                 <ul className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10 text-sm relative bg-white dark:bg-neutral-900 py-4 grid space-y-1">
                   {item.children?.map((i) => {
                     if (i.type) {
-                      return renderDropdownMenuNavlinkHasChild(i);
+                      return renderDropdownMenuNavlinkHasChildren(i);
                     } else {
                       return (
                         <li key={i.id} className="px-2">

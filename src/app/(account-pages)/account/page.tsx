@@ -84,7 +84,7 @@ const AccountPage = () => {
           </div>
           {/* ---- */}
           <div>
-            <Label>About you</Label>
+            <Label>Pricei thi?u you</Label>
             <Textarea className="mt-1.5" defaultValue="..." />
           </div>
           <div className="pt-2">

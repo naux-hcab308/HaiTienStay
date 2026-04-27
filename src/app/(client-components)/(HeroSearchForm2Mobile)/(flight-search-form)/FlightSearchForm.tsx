@@ -24,7 +24,7 @@ const FlightSearchForm = () => {
   >("Round-trip");
   const [flightClassState, setFlightClassState] = useState("Economy");
 
-  const [guestInput, setGuestInput] = useState<GuestsObject>({
+  const [guestInput, setGuestsInput] = useState<GuestsObject>({
     guestAdults: 0,
     guestChildren: 0,
     guestInfants: 0,
@@ -244,7 +244,7 @@ const FlightSearchForm = () => {
             <span>{guestSelected || `Add guests`}</span>
           </button>
         ) : (
-          <GuestsInput defaultValue={guestInput} onChange={setGuestInput} />
+          <GuestsInput defaultValue={guestInput} onChange={setGuestsInput} />
         )}
       </div>
     );

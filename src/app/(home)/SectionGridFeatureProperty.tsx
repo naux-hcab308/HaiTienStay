@@ -9,7 +9,7 @@ import HeaderFilter from "@/components/HeaderFilter";
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
 //
 export interface SectionGridFeaturePropertyProps {
-  stayListings?: StayDataType[];
+  stayListing?: StayDataType[];
   gridClass?: string;
   heading?: ReactNode;
   subHeading?: ReactNode;
@@ -18,7 +18,7 @@ export interface SectionGridFeaturePropertyProps {
 }
 
 const SectionGridFeatureProperty: FC<SectionGridFeaturePropertyProps> = ({
-  stayListings = DEMO_DATA,
+  stayListing = DEMO_DATA,
   gridClass = "",
   heading = "Featured places to stay",
   subHeading = "Popular places to stay that Chisfis recommends for you",
@@ -40,7 +40,7 @@ const SectionGridFeatureProperty: FC<SectionGridFeaturePropertyProps> = ({
       <div
         className={`grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-1 xl:grid-cols-2 ${gridClass}`}
       >
-        {stayListings.map(renderCard)}
+        {stayListing.map(renderCard)}
       </div>
       <div className="flex mt-16 justify-center items-center">
         <ButtonPrimary loading>Show me more</ButtonPrimary>

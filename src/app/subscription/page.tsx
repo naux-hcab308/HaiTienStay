@@ -111,7 +111,7 @@ const PageSubcription: FC<PageSubcriptionProps> = () => {
       <header className="text-center max-w-2xl mx-auto my-20">
         <h2 className="flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
           <span className="mr-4 text-3xl md:text-4xl leading-none">💎</span>
-          Subscription
+          Sign up g?i
         </h2>
         <span className="block text-sm mt-2 text-neutral-700 sm:text-base dark:text-neutral-200">
           Pricing to fit the needs of any companie size.

@@ -8,7 +8,7 @@ const megaMenuDemo: MegamenuItem[] = [
     id: ncNanoId(),
     image:
       "https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    title: "Company",
+    title: "Công ty",
     items: __megamenu.map((i) => ({
       id: ncNanoId(),
       href: "/",
@@ -19,7 +19,7 @@ const megaMenuDemo: MegamenuItem[] = [
     id: ncNanoId(),
     image:
       "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    title: "App Name",
+    title: "Tên ứng dụng",
     items: __megamenu.map((i) => ({
       id: ncNanoId(),
       href: "/",
@@ -30,7 +30,7 @@ const megaMenuDemo: MegamenuItem[] = [
     id: ncNanoId(),
     image:
       "https://images.pexels.com/photos/5059013/pexels-photo-5059013.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    title: "City",
+    title: "Thành phố",
     items: __megamenu.map((i) => ({
       id: ncNanoId(),
       href: "/",
@@ -41,7 +41,7 @@ const megaMenuDemo: MegamenuItem[] = [
     id: ncNanoId(),
     image:
       "https://images.pexels.com/photos/5159141/pexels-photo-5159141.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    title: "Contruction",
+    title: "Công trình",
     items: __megamenu.map((i) => ({
       id: ncNanoId(),
       href: "/",
@@ -52,7 +52,7 @@ const megaMenuDemo: MegamenuItem[] = [
     id: ncNanoId(),
     image:
       "https://images.pexels.com/photos/7473041/pexels-photo-7473041.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    title: "Country",
+    title: "Quốc gia",
     items: __megamenu.map((i) => ({
       id: ncNanoId(),
       href: "/",
@@ -61,105 +61,105 @@ const megaMenuDemo: MegamenuItem[] = [
   },
 ];
 
-const demoChildMenus: NavItemType[] = [
+const demoChildrenMenus: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/",
-    name: "Online booking",
+    name: "Đặt phòng trực tuyến",
   },
   {
     id: ncNanoId(),
     href: "/home-2",
-    name: "Real estate",
+    name: "Bất động sản",
     isNew: true,
   },
   {
     id: ncNanoId(),
     href: "/home-3",
-    name: "Home 3",
+    name: "Trang chủ 3",
     isNew: true,
   },
 ];
 
-const otherPageChildMenus: NavItemType[] = [
+const otherPageChildrenMenus: NavItemType[] = [
   { id: ncNanoId(), href: "/blog", name: "Blog page" },
-  { id: ncNanoId(), href: "/blog/single" as Route, name: "Blog single" },
-  { id: ncNanoId(), href: "/about", name: "About" },
-  { id: ncNanoId(), href: "/contact", name: "Contact us" },
-  { id: ncNanoId(), href: "/login", name: "Login" },
-  { id: ncNanoId(), href: "/signup", name: "Signup" },
+  { id: ncNanoId(), href: "/blog/single" as Route, name: "Bài viết blog" },
+  { id: ncNanoId(), href: "/about", name: "Giới thiệu" },
+  { id: ncNanoId(), href: "/contact", name: "Liên hệ" },
+  { id: ncNanoId(), href: "/login", name: "Đăng nhập" },
+  { id: ncNanoId(), href: "/signup", name: "Đăng ký" },
 ];
 
 const templatesChildrenMenus: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/add-listing/1" as Route,
-    name: "Add listing",
+    name: "Thêm tin đăng",
     type: "dropdown",
     children: [
       {
         id: ncNanoId(),
         href: "/add-listing/1" as Route,
-        name: "Add listing 1",
+        name: "Thêm tin đăng 1",
       },
       {
         id: ncNanoId(),
         href: "/add-listing/2" as Route,
-        name: "Add listing 2",
+        name: "Thêm tin đăng 2",
       },
       {
         id: ncNanoId(),
         href: "/add-listing/3" as Route,
-        name: "Add listing 3",
+        name: "Thêm tin đăng 3",
       },
       {
         id: ncNanoId(),
         href: "/add-listing/4" as Route,
-        name: "Add listing 4",
+        name: "Thêm tin đăng 4",
       },
       {
         id: ncNanoId(),
         href: "/add-listing/5" as Route,
-        name: "Add listing 5",
+        name: "Thêm tin đăng 5",
       },
       {
         id: ncNanoId(),
         href: "/add-listing/6" as Route,
-        name: "Add listing 6",
+        name: "Thêm tin đăng 6",
       },
       {
         id: ncNanoId(),
         href: "/add-listing/7" as Route,
-        name: "Add listing 7",
+        name: "Thêm tin đăng 7",
       },
       {
         id: ncNanoId(),
         href: "/add-listing/8" as Route,
-        name: "Add listing 8",
+        name: "Thêm tin đăng 8",
       },
       {
         id: ncNanoId(),
         href: "/add-listing/9" as Route,
-        name: "Add listing 9",
+        name: "Thêm tin đăng 9",
       },
       {
         id: ncNanoId(),
         href: "/add-listing/10" as Route,
-        name: "Add listing 10",
+        name: "Thêm tin đăng 10",
       },
     ],
   },
   //
-  { id: ncNanoId(), href: "/checkout", name: "Checkout" },
-  { id: ncNanoId(), href: "/pay-done", name: "Pay done" },
+  { id: ncNanoId(), href: "/checkout", name: "Thanh toán" },
+  { id: ncNanoId(), href: "/pay-done", name: "Thanh toán thành công" },
   //
-  { id: ncNanoId(), href: "/author", name: "Author page" },
-  { id: ncNanoId(), href: "/account", name: "Account page" },
+  { id: ncNanoId(), href: "/author", name: "Trang tác giả" },
+  { id: ncNanoId(), href: "/account", name: "Trang tài khoản" },
   //
   {
     id: ncNanoId(),
     href: "/subscription",
-    name: "Subscription",
+    name: "Đăng ký gói",
   },
 ];
 
@@ -167,37 +167,37 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/",
-    name: "Home",
+    name: "Trang chủ",
     type: "dropdown",
-    children: demoChildMenus,
+    children: demoChildrenMenus,
     isNew: true,
   },
   {
     id: ncNanoId(),
     href: "/",
-    name: "Five columns",
+    name: "Năm cột",
     type: "megaMenu",
     megaMenu: megaMenuDemo,
   },
   {
     id: ncNanoId(),
     href: "/listing-stay",
-    name: "Listing Page",
+    name: "Trang danh sách",
     type: "dropdown",
     children: [
       {
         id: ncNanoId(),
         href: "/listing-stay",
-        name: "Stay listings",
+        name: "Danh sách lưu trú",
         type: "dropdown",
         children: [
-          { id: ncNanoId(), href: "/listing-stay", name: "Stay page" },
+          { id: ncNanoId(), href: "/listing-stay", name: "Trang lưu trú" },
           {
             id: ncNanoId(),
             href: "/listing-stay-map",
-            name: "Stay page (map)",
+            name: "Trang lưu trú (bản đồ)",
           },
-          { id: ncNanoId(), href: "/listing-stay-detail", name: "Stay Detail" },
+          { id: ncNanoId(), href: "/listing-stay-detail", name: "Chi tiết lưu trú" },
         ],
       },
 
@@ -205,23 +205,23 @@ export const NAVIGATION_DEMO: NavItemType[] = [
       {
         id: ncNanoId(),
         href: "/listing-experiences",
-        name: "Experiences listings",
+        name: "Danh sách trải nghiệm",
         type: "dropdown",
         children: [
           {
             id: ncNanoId(),
             href: "/listing-experiences",
-            name: "Experiences page",
+            name: "Trang trải nghiệm",
           },
           {
             id: ncNanoId(),
             href: "/listing-experiences-map",
-            name: "Experiences page (map)",
+            name: "Trang trải nghiệm (bản đồ)",
           },
           {
             id: ncNanoId(),
             href: "/listing-experiences-detail",
-            name: "Experiences Detail",
+            name: "Chi tiết trải nghiệm",
           },
         ],
       },
@@ -230,31 +230,31 @@ export const NAVIGATION_DEMO: NavItemType[] = [
       {
         id: ncNanoId(),
         href: "/listing-car",
-        name: "Cars listings",
+        name: "Danh sách xe",
         type: "dropdown",
         children: [
           { id: ncNanoId(), href: "/listing-car", name: "Cars page" },
-          { id: ncNanoId(), href: "/listing-car-map", name: "Cars page (map)" },
-          { id: ncNanoId(), href: "/listing-car-detail", name: "Car Detail" },
+          { id: ncNanoId(), href: "/listing-car-map", name: "Cars page (bản đồ)" },
+          { id: ncNanoId(), href: "/listing-car-detail", name: "Chi tiết xe" },
         ],
       },
 
       //
       {
         id: ncNanoId(),
-        href: "/home",
-        name: "Real Estate Listings",
+        href: "/home-2",
+        name: "Danh sách bất động sản",
         type: "dropdown",
         children: [
           {
             id: ncNanoId(),
-            href: "/home",
-            name: "Real Estate Listings",
+            href: "/home-2",
+            name: "Danh sách bất động sản",
           },
           {
             id: ncNanoId(),
             href: "/listing-real-estate-map",
-            name: "Real Estate Maps",
+            name: "Bản đồ bất động sản",
           },
         ],
       },
@@ -262,14 +262,14 @@ export const NAVIGATION_DEMO: NavItemType[] = [
       {
         id: ncNanoId(),
         href: "/listing-flights",
-        name: "Flights listings",
+        name: "Danh sách chuyến bay",
       },
     ],
   },
   {
     id: ncNanoId(),
     href: "/author",
-    name: "Templates",
+    name: "Mẫu trang",
     type: "dropdown",
     children: templatesChildrenMenus,
   },
@@ -277,9 +277,9 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/blog",
-    name: "Other pages",
+    name: "Trang khác",
     type: "dropdown",
-    children: otherPageChildMenus,
+    children: otherPageChildrenMenus,
   },
 ];
 
@@ -287,9 +287,9 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/",
-    name: "Home",
+    name: "Trang chủ",
     type: "dropdown",
-    children: demoChildMenus,
+    children: demoChildrenMenus,
     isNew: true,
   },
 
@@ -297,59 +297,59 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/listing-stay",
-    name: "Listing pages",
+    name: "Trang danh sách",
     children: [
-      { id: ncNanoId(), href: "/listing-stay", name: "Stay listings" },
+      { id: ncNanoId(), href: "/listing-stay", name: "Danh sách lưu trú" },
       {
         id: ncNanoId(),
         href: "/listing-stay-map",
-        name: "Stay listings (map)",
+        name: "Danh sách lưu trú (bản đồ)",
       },
-      { id: ncNanoId(), href: "/listing-stay-detail", name: "Stay detail" },
+      { id: ncNanoId(), href: "/listing-stay-detail", name: "Chi tiết lưu trú" },
 
       //
       {
         id: ncNanoId(),
         href: "/listing-experiences",
-        name: "Experiences listings",
+        name: "Danh sách trải nghiệm",
       },
       {
         id: ncNanoId(),
         href: "/listing-experiences-map",
-        name: "Experiences (map)",
+        name: "Trải nghiệm (bản đồ)",
       },
       {
         id: ncNanoId(),
         href: "/listing-experiences-detail",
-        name: "Experiences detail",
+        name: "Chi tiết trải nghiệm",
       },
     ],
   },
   {
     id: ncNanoId(),
     href: "/listing-car",
-    name: "Listing pages",
+    name: "Trang danh sách",
     children: [
-      { id: ncNanoId(), href: "/listing-car", name: "Cars listings" },
-      { id: ncNanoId(), href: "/listing-car-map", name: "Cars listings (map)" },
-      { id: ncNanoId(), href: "/listing-car-detail", name: "Car detail" },
+      { id: ncNanoId(), href: "/listing-car", name: "Danh sách xe" },
+      { id: ncNanoId(), href: "/listing-car-map", name: "Danh sách xe (bản đồ)" },
+      { id: ncNanoId(), href: "/listing-car-detail", name: "Chi tiết xe" },
 
       //
       {
         id: ncNanoId(),
-        href: "/home",
-        name: "Real estate listings",
+        href: "/home-2",
+        name: "Danh sách bất động sản",
       },
       {
         id: ncNanoId(),
         href: "/listing-real-estate-map",
-        name: "Real estate (map)",
+        name: "Bất động sản (bản đồ)",
       },
       //
       {
         id: ncNanoId(),
         href: "/listing-flights",
-        name: "Flights listings",
+        name: "Danh sách chuyến bay",
       },
     ],
   },
@@ -358,7 +358,7 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/author",
-    name: "Templates",
+    name: "Mẫu trang",
     type: "dropdown",
     children: templatesChildrenMenus,
   },
@@ -367,8 +367,8 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/blog",
-    name: "Other pages",
+    name: "Trang khác",
     type: "dropdown",
-    children: otherPageChildMenus,
+    children: otherPageChildrenMenus,
   },
 ];

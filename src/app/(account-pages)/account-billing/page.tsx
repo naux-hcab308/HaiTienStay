@@ -5,7 +5,7 @@ const AccountBilling = () => {
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* HEADING */}
-      <h2 className="text-3xl font-semibold">Payments & payouts</h2>
+      <h2 className="text-3xl font-semibold">Checkouts & payouts</h2>
       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
       <div className="max-w-2xl">
         <span className="text-xl font-semibold block">Payout methods</span>

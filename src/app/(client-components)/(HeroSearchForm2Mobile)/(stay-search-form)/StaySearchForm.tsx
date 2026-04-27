@@ -14,7 +14,7 @@ const StaySearchForm = () => {
   >("location");
   //
   const [locationInputTo, setLocationInputTo] = useState("");
-  const [guestInput, setGuestInput] = useState<GuestsObject>({
+  const [guestInput, setGuestsInput] = useState<GuestsObject>({
     guestAdults: 0,
     guestChildren: 0,
     guestInfants: 0,
@@ -122,7 +122,7 @@ const StaySearchForm = () => {
             <span>{guestSelected || `Add guests`}</span>
           </button>
         ) : (
-          <GuestsInput defaultValue={guestInput} onChange={setGuestInput} />
+          <GuestsInput defaultValue={guestInput} onChange={setGuestsInput} />
         )}
       </div>
     );

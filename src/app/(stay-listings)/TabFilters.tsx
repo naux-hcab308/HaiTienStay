@@ -61,8 +61,8 @@ const moreFilter3 = [
   { name: " Chalet", defaultChecked: true },
   { name: " Condominium", defaultChecked: true },
   { name: " Cottage" },
-  { name: " Guest suite" },
-  { name: " Guesthouse" },
+  { name: " Guests suite" },
+  { name: " Guestshouse" },
 ];
 
 const moreFilter4 = [{ name: " Pets allowed" }, { name: "Smoking allowed" }];

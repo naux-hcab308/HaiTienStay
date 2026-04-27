@@ -23,9 +23,9 @@ const solutions: SolutionItem[] = [
     icon: IconOne,
   },
   {
-    name: "Real Estate",
-    description: "Real Estate description",
-    href: "/home",
+    name: "Real estate",
+    description: "Real estate description",
+    href: "/home-2",
     icon: IconTwo,
   },
   {

@@ -31,9 +31,9 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
     "roundTrip" | "oneWay" | ""
   >("roundTrip");
   const [flightClassState, setFlightClassState] = useState("Economy");
-  const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(2);
-  const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(1);
-  const [guestInfantsInputValue, setGuestInfantsInputValue] = useState(1);
+  const [guestAdultsInputValue, setGuestsAdultsInputValue] = useState(2);
+  const [guestChildrenInputValue, setGuestsChildrenInputValue] = useState(1);
+  const [guestInfantsInputValue, setGuestsInfantsInputValue] = useState(1);
 
   const handleChangeData = (value: number, type: keyof GuestsObject) => {
     let newValue = {
@@ -42,15 +42,15 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
       guestInfants: guestInfantsInputValue,
     };
     if (type === "guestAdults") {
-      setGuestAdultsInputValue(value);
+      setGuestsAdultsInputValue(value);
       newValue.guestAdults = value;
     }
     if (type === "guestChildren") {
-      setGuestChildrenInputValue(value);
+      setGuestsChildrenInputValue(value);
       newValue.guestChildren = value;
     }
     if (type === "guestInfants") {
-      setGuestInfantsInputValue(value);
+      setGuestsInfantsInputValue(value);
       newValue.guestInfants = value;
     }
   };
@@ -58,7 +58,7 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
   const totalGuests =
     guestChildrenInputValue + guestAdultsInputValue + guestInfantsInputValue;
 
-  const renderGuest = () => {
+  const renderGuests = () => {
     return (
       <div className="">
         <Popover className="relative">
@@ -208,7 +208,7 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
           {renderSelectClass()}
         </div>
         <div className="border border-neutral-300 dark:border-neutral-700 rounded-full">
-          {renderGuest()}
+          {renderGuests()}
         </div>
       </div>
     );

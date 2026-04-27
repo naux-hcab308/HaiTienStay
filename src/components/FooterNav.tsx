@@ -35,7 +35,7 @@ const NAV: NavItem[] = [
     icon: HeartIcon,
   },
   {
-    name: "Log in",
+    name: "Login",
     link: "/account",
     icon: UserCircleIcon,
   },
