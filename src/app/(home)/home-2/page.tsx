@@ -39,7 +39,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "1",
     href: "/home-2",
-    name: "Enjoy the great cold",
+    name: "Sáng sớm đón gió biển Hải Tiến",
     taxonomy: "category",
     count: 188288,
     thumbnail:
@@ -48,7 +48,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "2",
     href: "/home-2",
-    name: "Sleep in a floating way",
+    name: "Không gian nghỉ ngơi thoáng mở",
     taxonomy: "category",
     count: 188288,
     thumbnail:
@@ -57,7 +57,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "3",
     href: "/home-2",
-    name: "In the billionaire's house",
+    name: "Phòng ấm cúng cho gia đình nhỏ",
     taxonomy: "category",
     count: 188288,
     thumbnail:
@@ -66,7 +66,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "4",
     href: "/home-2",
-    name: "Cool in the deep forest",
+    name: "Sân vườn xanh và khu BBQ",
     taxonomy: "category",
     count: 188288,
     thumbnail:
@@ -75,7 +75,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "5",
     href: "/home-2",
-    name: "In the billionaire's house",
+    name: "Góc check-in nhiều ánh sáng đẹp",
     taxonomy: "category",
     count: 188288,
     thumbnail:
@@ -84,7 +84,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "6",
     href: "/home-2",
-    name: "Sleep in a floating way",
+    name: "Phòng tiêu chuẩn đồng bộ tiện nghi",
     taxonomy: "category",
     count: 188288,
     thumbnail:
@@ -93,7 +93,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "7",
     href: "/home-2",
-    name: "In the billionaire's house",
+    name: "Kỳ nghỉ nhẹ nhàng cuối tuần",
     taxonomy: "category",
     count: 188288,
     thumbnail:
@@ -137,22 +137,22 @@ function PageHome2() {
               id: 1,
               img: HIW1img,
               imgDark: HIW1imgDark,
-              title: "Smart search",
-              desc: "Name the area or type of home you are looking for the search bar. Our app will find you the perfect match.",
+              title: "Tìm kiếm nhanh",
+              desc: "Nhập khu vực Hải Tiến hoặc nhu cầu lưu trú để xem ngay hạng phòng phù hợp tại homestay.",
             },
             {
               id: 2,
               img: HIW2img,
               imgDark: HIW2imgDark,
-              title: "Choose property",
-              desc: "From the number of options our app will provide, you can select any property that you like to explore.",
+              title: "Chọn phòng",
+              desc: "Homestay có 1 hạng phòng duy nhất với 8 phòng đồng bộ, giúp bạn chọn nhanh và dễ so sánh.",
             },
             {
               id: 3,
               img: HIW3img,
               imgDark: HIW3imgDark,
-              title: "Book you property",
-              desc: "Find a home or space from our search bar. Enter your specific location, property type and price range.",
+              title: "Đặt phòng",
+              desc: "Chọn ngày ở, số khách và gửi yêu cầu đặt phòng trực tiếp để quản trị xác nhận nhanh chóng.",
             },
           ]}
         />
@@ -170,8 +170,8 @@ function PageHome2() {
           categories={DEMO_CATS_2}
           categoryCardType="card4"
           itemPerRow={4}
-          heading="Suggestions for discovery"
-          subHeading="Popular places to stay that Chisfis recommends for you"
+          heading="Gợi ý trải nghiệm nổi bật"
+          subHeading="Những không gian được khách lưu trú yêu thích tại Hải Tiến Stay"
         />
 
         <div className="relative py-16">
@@ -180,8 +180,8 @@ function PageHome2() {
         </div>
 
         <SectionSliderNewCategories
-          heading="Explore by types of stays"
-          subHeading="Explore houses based on 10 types of stays"
+          heading="Khám phá không gian homestay"
+          subHeading="Tổng hợp các khu vực nghỉ ngơi, sinh hoạt chung và góc check-in đẹp"
           categoryCardType="card5"
           itemPerRow={5}
         />

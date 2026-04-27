@@ -1,14 +1,5 @@
-import React, { FC } from "react";
-import SectionGridFilterCard from "../SectionGridFilterCard";
+import { redirect } from "next/navigation";
 
-export interface HomeRealEstatePageProps {}
-
-const HomeRealEstatePage: FC<HomeRealEstatePageProps> = ({}) => {
-  return (
-    <div className="container relative">
-      <SectionGridFilterCard className="py-24 lg:py-28" />
-    </div>
-  );
-};
-
-export default HomeRealEstatePage;
+export default function HomeRealEstatePage() {
+  redirect("/home-2");
+}

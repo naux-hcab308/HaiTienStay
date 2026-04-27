@@ -16,29 +16,23 @@ interface SolutionItem {
 
 const solutions: SolutionItem[] = [
   {
-    name: "Stays",
-    description: "Stays rental description ",
+    name: "Xem phòng",
+    description: "Danh sách 8 phòng tiêu chuẩn",
     href: "/listing-stay",
     active: true,
     icon: IconOne,
   },
   {
-    name: "Real estate",
-    description: "Real estate description",
-    href: "/home-2",
+    name: "Đặt phòng",
+    description: "Gửi yêu cầu đặt phòng nhanh",
+    href: "/listing-stay-detail",
     icon: IconTwo,
   },
   {
-    name: "Cars",
-    description: "Car rental description",
-    href: "/listing-car",
+    name: "Blog trải nghiệm",
+    description: "Chia sẻ cảm nhận chuyến đi",
+    href: "/blog",
     icon: IconThree,
-  },
-  {
-    name: "Experiences",
-    description: "Tour and experiences",
-    href: "/listing-experiences",
-    icon: IconFour,
   },
 ];
 
@@ -52,7 +46,7 @@ export default function DropdownTravelers() {
                 group self-center py-2 h-10 sm:h-12 rounded-md text-sm sm:text-base font-medium hover:text-opacity-100 focus:outline-none`}
           >
             <div className={` inline-flex items-center `} role="button">
-              <span>Travelers</span>
+              <span>Danh mục</span>
               <ChevronDownIcon
                 className={`${open ? "-rotate-180" : "text-opacity-70 "}
                   ml-2 h-5 w-5 text-neutral-700 group-hover:text-opacity-80 transition ease-in-out duration-150 `}
@@ -96,16 +90,16 @@ export default function DropdownTravelers() {
                 {/* FOOTER */}
                 <div className="p-4 bg-neutral-50 dark:bg-neutral-700">
                   <Link
-                    href="/"
+                    href="/home-2"
                     className="flow-root px-2 py-2 space-y-0.5 transition duration-150 ease-in-out rounded-md focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                   >
                     <span className="flex items-center">
                       <span className="text-sm font-medium ">
-                        Documentation
+                        Hải Tiến Stay
                       </span>
                     </span>
                     <span className="block text-sm text-gray-500 dark:text-neutral-400">
-                      Start integrating products and tools
+                      Homestay nhỏ bên biển với 8 phòng tiêu chuẩn
                     </span>
                   </Link>
                 </div>

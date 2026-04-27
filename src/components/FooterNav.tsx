@@ -25,18 +25,18 @@ interface NavItem {
 
 const NAV: NavItem[] = [
   {
-    name: "Explore",
-    link: "/",
+    name: "Trang chủ",
+    link: "/home-2",
     icon: MagnifyingGlassIcon,
   },
   {
-    name: "Wishlists",
-    link: "/account-savelists",
+    name: "Phòng",
+    link: "/listing-stay",
     icon: HeartIcon,
   },
   {
-    name: "Login",
-    link: "/account",
+    name: "Đặt phòng",
+    link: "/listing-stay-detail",
     icon: UserCircleIcon,
   },
   {
