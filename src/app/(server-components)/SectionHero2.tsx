@@ -35,7 +35,7 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", children }) => {
       </div>
       <div className="relative hidden sm:block py-14 lg:py-20">
         <div className="relative inline-flex w-[min(60vw,760px)]">
-          <div className="absolute inset-0 bg-primary-500" />
+          <div className="absolute inset-y-0 right-0 left-[calc(50%-50vw)] bg-primary-500" />
           <div className="relative flex min-h-[360px] w-full flex-shrink-0 flex-col items-center justify-center px-8 text-white sm:min-h-[400px] sm:px-10 lg:min-h-[440px] lg:px-12">
             {children ? (
               children
