@@ -34,6 +34,9 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", children }) => {
         <Image fill className="object-cover" src={imagePng} alt="hero" />
       </div>
       <div className="relative hidden sm:block py-14 lg:py-20">
+        <p className="absolute left-0 top-4 z-10 text-lg font-semibold tracking-wide text-yellow-300 lg:top-6">
+          Hotline: 0833555757
+        </p>
         <div className="relative inline-flex">
           <div className="absolute inset-y-0 right-0 w-screen bg-primary-500" />
           <div className="relative inline-flex max-w-3xl flex-shrink-0 flex-col items-center py-16 text-white sm:py-20 lg:py-24">
@@ -41,8 +44,11 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", children }) => {
               children
             ) : (
               <h2 className="text-center font-semibold !leading-[120%] text-4xl md:text-5xl xl:text-6xl">
-                <span className="block">-YARA-</span>
-                <span className="block">Góc nhỏ yên{"\u00A0"}lành</span>
+                <span className="block italic">-YARA-</span>
+                <span className="block">
+                  Góc nhỏ yên
+                  <span className="ml-3 inline-block">lành</span>
+                </span>
                 <span className="block">tại Hải Tiến</span>
               </h2>
             )}
