@@ -29,7 +29,7 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
           </ButtonPrimary>
         </div>
 
-        <div className="hidden md:flex justify-start flex-1 space-x-4 sm:space-x-10">
+        <div className="hidden md:flex justify-start flex-1 space-x-3 lg:space-x-6">
           <Logo className="w-28 self-center" />
           <Navigation />
         </div>

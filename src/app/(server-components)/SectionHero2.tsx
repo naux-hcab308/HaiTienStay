@@ -34,9 +34,9 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", children }) => {
         <Image fill className="object-cover" src={imagePng} alt="hero" />
       </div>
       <div className="relative hidden sm:block py-14 lg:py-20">
-        <div className="relative inline-flex">
-          <div className="absolute inset-y-0 right-0 w-screen bg-primary-500" />
-          <div className="relative inline-flex max-w-3xl flex-shrink-0 flex-col items-center justify-center py-16 text-white sm:py-20 lg:py-24">
+        <div className="relative inline-flex w-[min(60vw,760px)]">
+          <div className="absolute inset-0 bg-primary-500" />
+          <div className="relative flex min-h-[360px] w-full flex-shrink-0 flex-col items-center justify-center px-8 text-white sm:min-h-[400px] sm:px-10 lg:min-h-[440px] lg:px-12">
             {children ? (
               children
             ) : (
