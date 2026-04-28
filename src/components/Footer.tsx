@@ -5,6 +5,8 @@ import SocialsList1 from "@/shared/SocialsList1";
 import { CustomLink } from "@/data/types";
 import React from "react";
 import FooterNav from "./FooterNav";
+import Link from "next/link";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 
 export interface WidgetFooterMenu {
   id: string;
@@ -36,17 +38,6 @@ const widgetMenus: WidgetFooterMenu[] = [
     ],
   },
   {
-    id: "2",
-    title: "Hai vai trò chính",
-    menus: [
-      { href: "/home-2", label: "Khách xem và đặt phòng" },
-      { href: "/blog", label: "Khách viết blog trải nghiệm" },
-      { href: "/listing-stay-detail", label: "Quản trị xác nhận đặt phòng" },
-      { href: "/blog", label: "Quản trị duyệt bài blog" },
-      { href: "/contact", label: "Liên hệ quản trị homestay" },
-    ],
-  },
-  {
     id: "4",
     title: "Kết nối",
     menus: [
@@ -60,6 +51,8 @@ const widgetMenus: WidgetFooterMenu[] = [
 ];
 
 const Footer: React.FC = () => {
+  const { isAdmin, logout } = useAdminAuth();
+
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
       <div key={index} className="text-sm">
@@ -67,10 +60,9 @@ const Footer: React.FC = () => {
           {menu.title}
         </h2>
         <ul className="mt-5 space-y-4">
-          {menu.menus.map((item, index) => (
-            <li key={index}>
+          {menu.menus.map((item, itemIndex) => (
+            <li key={itemIndex}>
               <a
-                key={index}
                 className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
                 href={item.href}
               >
@@ -78,6 +70,26 @@ const Footer: React.FC = () => {
               </a>
             </li>
           ))}
+          {menu.id === "5" ? (
+            <li>
+              {!isAdmin ? (
+                <Link
+                  href="/admin/login"
+                  className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
+                >
+                  Admin
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
+                >
+                  Thoát admin
+                </button>
+              )}
+            </li>
+          ) : null}
         </ul>
       </div>
     );
@@ -88,7 +100,7 @@ const Footer: React.FC = () => {
       <FooterNav />
 
       <div className="nc-Footer relative py-24 lg:py-28 border-t border-neutral-200 dark:border-neutral-700">
-        <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
+        <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10">
           <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
             <div className="col-span-2 md:col-span-1">
               <Logo />

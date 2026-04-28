@@ -87,6 +87,11 @@ export interface StayDataType {
     lat: number;
     lng: number;
   };
+  roomTag?: string;
+  roomBedInfo?: string;
+  weekdayPriceLabel?: string;
+  weekendPriceLabel?: string;
+  isBestSeller?: boolean;
 }
 
 //

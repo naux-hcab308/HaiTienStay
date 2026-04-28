@@ -277,7 +277,7 @@ export default function TuyenDungPage() {
           </a>
           <p className="mt-4 text-primary-200 text-sm">
             Hoặc liên hệ trực tiếp qua Zalo:{" "}
-            <span className="font-semibold text-white">0123 456 789</span>
+            <span className="font-semibold text-white">0833555757</span>
           </p>
         </div>
       </section>

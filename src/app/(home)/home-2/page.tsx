@@ -4,7 +4,6 @@ import SectionOurFeatures from "@/components/SectionOurFeatures";
 import SectionHowItWork from "@/components/SectionHowItWork";
 import BackgroundSection from "@/components/BackgroundSection";
 import { TaxonomyType } from "@/data/types";
-import SectionGridAuthorBox from "@/components/SectionGridAuthorBox";
 //
 import HIW1img from "@/images/HIW2-1.png";
 import HIW2img from "@/images/HIW2-2.png";
@@ -12,7 +11,7 @@ import HIW3img from "@/images/HIW2-3.png";
 import HIW1imgDark from "@/images/HIW2-1-dark.png";
 import HIW2imgDark from "@/images/HIW2-2-dark.png";
 import HIW3imgDark from "@/images/HIW2-3-dark.png";
-import rightImgPng from "@/images/our-features-2.png";
+import rightImgPng from "@/images/haitien/garden-1.jpg";
 
 import SectionGridFeatureProperty from "../SectionGridFeatureProperty";
 import SectionHero2 from "@/app/(server-components)/SectionHero2";
@@ -133,10 +132,6 @@ function PageHome2() {
           subHeading="Những không gian được khách lưu trú yêu thích tại Yara"
         />
 
-        <div className="relative py-16">
-          <BackgroundSection className="bg-neutral-100 dark:bg-black dark:bg-opacity-20 " />
-          <SectionGridAuthorBox boxCard="box2" />
-        </div>
 
         <SectionSliderNewCategories
           heading="Khám phá không gian homestay"

@@ -1,7 +1,6 @@
 import BackgroundSection from "@/components/BackgroundSection";
 import BgGlassmorphism from "@/components/BgGlassmorphism";
 import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
 import React, { ReactNode } from "react";
 
 const Layout = ({ children }: { children: ReactNode }) => {
@@ -24,11 +23,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
             sliderStyle="style2"
           />
         </div>
-
-        {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-28" />
-
-
       </div>
     </div>
   );

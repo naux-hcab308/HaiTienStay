@@ -1,263 +1,166 @@
 "use client";
 
-import { Tab } from "@headlessui/react";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import React, { FC, Fragment, useState } from "react";
-import visaPng from "@/images/vis.png";
-import mastercardPng from "@/images/mastercard.svg";
-import Input from "@/shared/Input";
-import Label from "@/components/Label";
-import Textarea from "@/shared/Textarea";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import StartRating from "@/components/StartRating";
-import NcModal from "@/shared/NcModal";
-import ModalSelectDate from "@/components/ModalSelectDate";
-import converSelectedDateToString from "@/utils/converSelectedDateToString";
-import ModalSelectGuests from "@/components/ModalSelectGuests";
+import React, { FC, useMemo } from "react";
 import Image from "next/image";
-import { GuestsObject } from "../(client-components)/type";
+import { useRouter, useSearchParams } from "next/navigation";
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import { getBookingById } from "@/utils/bookingStorage";
 
 export interface CheckOutPagePageMainProps {
   className?: string;
 }
 
+const ROOM_PRICE_MAP: Record<
+  string,
+  { weekday: string; weekend: string; from: string }
+> = {
+  "Phòng đôi (2 người)": {
+    weekday: "Giá từ thứ 2 đến thứ 5: 400.000 VND/phòng",
+    weekend: "Thứ 6, thứ 7 và CN: 500.000 VND/phòng",
+    from: "400.000đ/đêm",
+  },
+  "Phòng 3 người": {
+    weekday: "Giá thuê: Từ CN đến thứ 2: 500.000 VND/phòng",
+    weekend: "Thứ 6,7 và CN: 650.000 VND/phòng",
+    from: "500.000đ/đêm",
+  },
+  "Phòng 4 người": {
+    weekday: "Giá thuê: Từ CN đến thứ 2: 550.000 VND/phòng",
+    weekend: "Thứ 6,7 và CN: 700.000 VND/phòng",
+    from: "550.000đ/đêm",
+  },
+  "Phòng 6 người": {
+    weekday: "Giá thuê: Từ CN đến thứ 2: 900.000 VND/phòng",
+    weekend: "Thứ 6,7 và CN: 1.200.000 VND/phòng",
+    from: "900.000đ/đêm",
+  },
+  "Phòng 8 người": {
+    weekday: "Giá thuê: Từ CN đến thứ 2: 900.000 VND/phòng",
+    weekend: "Thứ 6,7 và CN: 1.200.000 VND/phòng",
+    from: "900.000đ/đêm",
+  },
+};
+
 const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
   className = "",
 }) => {
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/02/06")
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const bookingId = searchParams.get("bookingId") || "";
+
+  const booking = useMemo(
+    () => (bookingId ? getBookingById(bookingId) : null),
+    [bookingId]
   );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
+  const roomPrice = booking ? ROOM_PRICE_MAP[booking.roomType] : null;
 
-  const [guests, setGuests] = useState<GuestsObject>({
-    guestAdults: 2,
-    guestChildren: 1,
-    guestInfants: 1,
-  });
-
-  const renderSidebar = () => {
-    return (
-      <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
-        <div className="flex flex-col sm:flex-row sm:items-center">
-          <div className="flex-shrink-0 w-full sm:w-40">
-            <div className=" aspect-w-4 aspect-h-3 sm:aspect-h-4 rounded-2xl overflow-hidden">
-              <Image
-                alt=""
-                fill
-                sizes="200px"
-                src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-              />
-            </div>
-          </div>
-          <div className="py-5 sm:px-5 space-y-3">
-            <div>
-              <span className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1">
-                Hotel room in Tokyo, Jappan
-              </span>
-              <span className="text-base font-medium mt-1 block">
-                The Lounge & Bar
-              </span>
-            </div>
-            <span className="block  text-sm text-neutral-500 dark:text-neutral-400">
-              2 beds · 2 baths
-            </span>
-            <div className="w-10 border-b border-neutral-200  dark:border-neutral-700"></div>
-            <StartRating />
-          </div>
-        </div>
-        <div className="flex flex-col space-y-4">
-          <h3 className="text-2xl font-semibold">Price detail</h3>
-          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>$19 x 3 day</span>
-            <span>$57</span>
-          </div>
-          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>Service charge</span>
-            <span>$0</span>
-          </div>
-
-          <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-          <div className="flex justify-between font-semibold">
-            <span>Total</span>
-            <span>$57</span>
-          </div>
-        </div>
-      </div>
-    );
+  const handleConfirm = () => {
+    if (!booking) {
+      router.push("/listing-stay-detail");
+      return;
+    }
+    router.push(`/pay-done?bookingId=${encodeURIComponent(booking.id)}`);
   };
 
-  const renderMain = () => {
+  if (!booking) {
     return (
-      <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
-        <h2 className="text-3xl lg:text-4xl font-semibold">
-          Confirm and payment
-        </h2>
-        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-        <div>
-          <div>
-            <h3 className="text-2xl font-semibold">Your trip</h3>
-            <NcModal
-              renderTrigger={(openModal) => (
-                <span
-                  onClick={() => openModal()}
-                  className="block lg:hidden underline  mt-1 cursor-pointer"
-                >
-                  View booking details
-                </span>
-              )}
-              renderContent={renderSidebar}
-              modalTitle="Booking details"
-            />
-          </div>
-          <div className="mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700 overflow-hidden z-10">
-            <ModalSelectDate
-              renderChildren={({ openModal }) => (
-                <button
-                  onClick={openModal}
-                  className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-neutral-50 dark:hover:bg-neutral-800"
-                  type="button"
-                >
-                  <div className="flex flex-col">
-                    <span className="text-sm text-neutral-400">Date</span>
-                    <span className="mt-1.5 text-lg font-semibold">
-                      {converSelectedDateToString([startDate, endDate])}
-                    </span>
-                  </div>
-                  <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
-                </button>
-              )}
-            />
-
-            <ModalSelectGuests
-              renderChildren={({ openModal }) => (
-                <button
-                  type="button"
-                  onClick={openModal}
-                  className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-neutral-50 dark:hover:bg-neutral-800"
-                >
-                  <div className="flex flex-col">
-                    <span className="text-sm text-neutral-400">Guests</span>
-                    <span className="mt-1.5 text-lg font-semibold">
-                      <span className="line-clamp-1">
-                        {`${
-                          (guests.guestAdults || 0) +
-                          (guests.guestChildren || 0)
-                        } Guests, ${guests.guestInfants || 0} Infants`}
-                      </span>
-                    </span>
-                  </div>
-                  <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
-                </button>
-              )}
-            />
+      <main className="container mt-11 mb-24 lg:mb-32">
+        <div className="max-w-3xl mx-auto rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
+          <h2 className="text-2xl font-semibold">Không tìm thấy đơn đặt phòng</h2>
+          <p className="mt-2 text-neutral-600 dark:text-neutral-300">
+            Bạn vui lòng quay lại trang đặt phòng và gửi lại thông tin.
+          </p>
+          <div className="mt-5">
+            <ButtonPrimary href="/listing-stay-detail">Quay lại đặt phòng</ButtonPrimary>
           </div>
         </div>
-
-        <div>
-          <h3 className="text-2xl font-semibold">Pay with</h3>
-          <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
-
-          <div className="mt-6">
-            <Tab.Group>
-              <Tab.List className="flex my-5 gap-1">
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                          : "text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      }`}
-                    >
-                      Paypal
-                    </button>
-                  )}
-                </Tab>
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                          : " text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      }`}
-                    >
-                      <span className="mr-2.5">Credit card</span>
-                      <Image className="w-8" src={visaPng} alt="visa" />
-                      <Image
-                        className="w-8"
-                        src={mastercardPng}
-                        alt="mastercard"
-                      />
-                    </button>
-                  )}
-                </Tab>
-              </Tab.List>
-
-              <Tab.Panels>
-                <Tab.Panel className="space-y-5">
-                  <div className="space-y-1">
-                    <Label>Card number </Label>
-                    <Input defaultValue="111 112 222 999" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Card holder </Label>
-                    <Input defaultValue="JOHN DOE" />
-                  </div>
-                  <div className="flex space-x-5  ">
-                    <div className="flex-1 space-y-1">
-                      <Label>Expiration date </Label>
-                      <Input type="date" defaultValue="MM/YY" />
-                    </div>
-                    <div className="flex-1 space-y-1">
-                      <Label>CVC </Label>
-                      <Input />
-                    </div>
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Messager for author </Label>
-                    <Textarea placeholder="..." />
-                    <span className="text-sm text-neutral-500 block">
-                      Write a few sentences about yourself.
-                    </span>
-                  </div>
-                </Tab.Panel>
-                <Tab.Panel className="space-y-5">
-                  <div className="space-y-1">
-                    <Label>Email </Label>
-                    <Input type="email" defaultValue="example@gmail.com" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Password </Label>
-                    <Input type="password" defaultValue="***" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Messager for author </Label>
-                    <Textarea placeholder="..." />
-                    <span className="text-sm text-neutral-500 block">
-                      Write a few sentences about yourself.
-                    </span>
-                  </div>
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-            <div className="pt-8">
-              <ButtonPrimary href={"/pay-done"}>Confirm and pay</ButtonPrimary>
-            </div>
-          </div>
-        </div>
-      </div>
+      </main>
     );
-  };
+  }
 
   return (
     <div className={`nc-CheckOutPagePageMain ${className}`}>
       <main className="container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
-        <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10 ">{renderMain()}</div>
-        <div className="hidden lg:block flex-grow">{renderSidebar()}</div>
+        <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10">
+          <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
+            <h2 className="text-3xl lg:text-4xl font-semibold">
+              Xác nhận yêu cầu đặt phòng
+            </h2>
+            <div className="border-b border-neutral-200 dark:border-neutral-700" />
+
+            <div className="space-y-3">
+              <h3 className="text-2xl font-semibold">Thông tin khách đặt</h3>
+              <p>
+                <span className="font-semibold">Họ tên:</span> {booking.customerName}
+              </p>
+              <p>
+                <span className="font-semibold">Số điện thoại:</span> {booking.phone}
+              </p>
+              <p>
+                <span className="font-semibold">Số khách:</span> {booking.guests}
+              </p>
+              <p>
+                <span className="font-semibold">Nhận phòng:</span>{" "}
+                {booking.checkIn || "-"}
+              </p>
+              <p>
+                <span className="font-semibold">Trả phòng:</span>{" "}
+                {booking.checkOut || "-"}
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <h3 className="text-2xl font-semibold">Thông tin phòng</h3>
+              <p>
+                <span className="font-semibold">Loại phòng:</span> {booking.roomType}
+              </p>
+              <p>
+                <span className="font-semibold">Mã phòng:</span> {booking.roomNo || "-"}
+              </p>
+              {roomPrice ? (
+                <>
+                  <p>
+                    <span className="font-semibold">Giá từ:</span> {roomPrice.from}
+                  </p>
+                  <p>{roomPrice.weekday}</p>
+                  <p>{roomPrice.weekend}</p>
+                </>
+              ) : null}
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={handleConfirm}
+                className="w-full sm:w-auto rounded-xl bg-primary-500 hover:bg-primary-600 transition-colors text-white py-3 px-6 font-semibold"
+              >
+                Xác nhận gửi yêu cầu
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden lg:block flex-grow">
+          <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
+            <div className="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden">
+              <Image
+                alt=""
+                fill
+                sizes="500px"
+                src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              />
+            </div>
+            <div className="space-y-2 text-sm">
+              <p className="font-semibold text-base">Yara Homestay</p>
+              <p>Đây là bước xác nhận yêu cầu đặt phòng, chưa thực hiện thanh toán.</p>
+              <p>Quản trị viên sẽ liên hệ lại để chốt thông tin cuối cùng.</p>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );
 };
 
 export default CheckOutPagePageMain;
+

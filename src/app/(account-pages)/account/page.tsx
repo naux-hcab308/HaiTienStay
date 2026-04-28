@@ -80,7 +80,7 @@ const AccountPage = () => {
           {/* ---- */}
           <div>
             <Label>Phone number</Label>
-            <Input className="mt-1.5" defaultValue="003 888 232" />
+            <Input className="mt-1.5" defaultValue="0833555757" />
           </div>
           {/* ---- */}
           <div>

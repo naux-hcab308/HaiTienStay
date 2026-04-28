@@ -1,43 +1,142 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
+
+import React, { FormEvent, useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { addBooking } from "@/utils/bookingStorage";
 
 const tienIch = [
-  "Wifi tốc độ cao toàn khu",
-  "Máy lạnh, nước nóng, máy sấy tóc",
-  "Khu bếp chung và bàn ăn ngoài trời",
-  "Bãi đỗ xe miễn phí",
-  "Khu BBQ buổi tối",
-  "Không gian mở, sân vườn thoáng",
+  "Thay khu BBQ buổi tối = Bữa sáng miễn phí",
+  "Xe điện đưa đón 02 chiều đi tham quan khu vui chơi & bãi biển Flamingo, đi thăm chùa Bụt - ngôi chùa nhìn ra biển nổi tiếng Hải Tiến",
+  "Đi thăm đền thờ Tô Hiến Thành - di tích lịch sử Quốc Gia",
 ];
 
 const ROOM_TYPES = [
-  { label: "Phòng đôi (2 người)", suc_chua: "2 người lớn", giuong: "1 giường đôi", gia: "850.000đ/đêm", tag: "Couple" },
-  { label: "Phòng 3 người", suc_chua: "3 người lớn", giuong: "1 đôi + 1 đơn", gia: "1.050.000đ/đêm", tag: "Family" },
-  { label: "Phòng 4 người", suc_chua: "4 người lớn", giuong: "2 giường đôi", gia: "1.200.000đ/đêm", tag: "Family" },
-  { label: "Phòng 6 người", suc_chua: "6 người lớn", giuong: "3 giường đôi", gia: "1.600.000đ/đêm", tag: "Group" },
-  { label: "Phòng 8 người", suc_chua: "8 người lớn", giuong: "4 giường đôi", gia: "2.000.000đ/đêm", tag: "Group" },
+  {
+    id: "room-2",
+    label: "Phòng đôi (2 người)",
+    sucChua: "2 người lớn",
+    giuong: "1 giường 1m6",
+    tag: "Couple",
+    weekdayPriceLabel: "Giá từ thứ 2 đến thứ 5: 400.000 VND/phòng",
+    weekendPriceLabel: "Thứ 6, thứ 7 và CN: 500.000 VND/phòng",
+    priceFrom: "400.000đ/đêm",
+    roomNos: ["P101", "P102", "P103", "P104"],
+    isBestSeller: false,
+  },
+  {
+    id: "room-3",
+    label: "Phòng 3 người",
+    sucChua: "3 người lớn",
+    giuong: "1 giường đôi 1m6 và 1 giường 1m2",
+    tag: "Family",
+    weekdayPriceLabel: "Giá thuê: Từ CN đến thứ 2: 500.000 VND/phòng",
+    weekendPriceLabel: "Thứ 6,7 và CN: 650.000 VND/phòng",
+    priceFrom: "500.000đ/đêm",
+    roomNos: [],
+    isBestSeller: false,
+  },
+  {
+    id: "room-4",
+    label: "Phòng 4 người",
+    sucChua: "4 người lớn",
+    giuong: "2 giường đôi 1m6",
+    tag: "Family",
+    weekdayPriceLabel: "Giá thuê: Từ CN đến thứ 2: 550.000 VND/phòng",
+    weekendPriceLabel: "Thứ 6,7 và CN: 700.000 VND/phòng",
+    priceFrom: "550.000đ/đêm",
+    roomNos: ["P107"],
+    isBestSeller: false,
+  },
+  {
+    id: "room-6",
+    label: "Phòng 6 người",
+    sucChua: "6 người lớn",
+    giuong: "3 giường đôi 1m6",
+    tag: "Group",
+    weekdayPriceLabel: "Giá thuê: Từ CN đến thứ 2: 900.000 VND/phòng",
+    weekendPriceLabel: "Thứ 6,7 và CN: 1.200.000 VND/phòng",
+    priceFrom: "900.000đ/đêm",
+    roomNos: ["P105"],
+    isBestSeller: true,
+  },
+  {
+    id: "room-8",
+    label: "Phòng 8 người",
+    sucChua: "8 người lớn",
+    giuong: "4 giường đôi 1m6",
+    tag: "Group",
+    weekdayPriceLabel: "Giá thuê: Từ CN đến thứ 2: 900.000 VND/phòng",
+    weekendPriceLabel: "Thứ 6,7 và CN: 1.200.000 VND/phòng",
+    priceFrom: "900.000đ/đêm",
+    roomNos: ["P106"],
+    isBestSeller: false,
+  },
 ];
 
+function getSelectedIndexByRoomNo(roomNo: string | null) {
+  if (!roomNo) return 0;
+  const normalized = roomNo.toUpperCase();
+  const idx = ROOM_TYPES.findIndex((room) => room.roomNos.includes(normalized));
+  return idx >= 0 ? idx : 0;
+}
+
 export default function ListingStayDetailPage() {
-  const [selectedRoom, setSelectedRoom] = useState(0);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedRoomNo = (searchParams.get("room") || "").toUpperCase();
+
+  const initialIndex = useMemo(
+    () => getSelectedIndexByRoomNo(selectedRoomNo || null),
+    [selectedRoomNo]
+  );
+  const [selectedRoom, setSelectedRoom] = useState(initialIndex);
+  const [customerName, setCustomerName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [guests, setGuests] = useState(1);
+
+  useEffect(() => {
+    setSelectedRoom(initialIndex);
+  }, [initialIndex]);
+
   const room = ROOM_TYPES[selectedRoom];
+  const effectiveRoomNo = useMemo(() => {
+    if (selectedRoomNo && room.roomNos.includes(selectedRoomNo)) {
+      return selectedRoomNo;
+    }
+    return room.roomNos[0] || "";
+  }, [room, selectedRoomNo]);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const booking = addBooking({
+      status: "pending",
+      roomType: room.label,
+      roomNo: effectiveRoomNo,
+      customerName: customerName || "Khách vãng lai",
+      phone: phone || "Chưa cung cấp",
+      checkIn,
+      checkOut,
+      guests: Number.isNaN(guests) ? 1 : guests,
+    });
+
+    router.push(`/checkout?bookingId=${encodeURIComponent(booking.id)}`);
+  };
 
   return (
     <main className="container py-10 lg:py-16">
       <div className="grid lg:grid-cols-3 gap-6">
         <section className="lg:col-span-2 space-y-6">
           <div className="rounded-3xl bg-neutral-100 dark:bg-neutral-800 p-8">
-            <p className="text-sm text-neutral-500">Hạng phòng duy nhất</p>
-            <h1 className="mt-2 text-3xl lg:text-4xl font-bold">
-              Phòng tiêu chuẩn – Yara Homestay
+            <h1 className="text-3xl lg:text-4xl font-bold">
+              Phòng tiêu chuẩn - Yara Homestay
             </h1>
             <p className="mt-3 text-neutral-700 dark:text-neutral-300">
-              5 loại phòng linh hoạt theo số lượng khách, thiết kế tối giản, sạch sẽ,
-              có cửa sổ thoáng và ban công nhỏ nhìn ra không gian chung.
+              Danh sách giá theo từng hạng phòng. Bạn có thể chọn nhanh hạng phòng
+              bên dưới để cập nhật thông tin đặt phòng tương ứng.
             </p>
 
-            {/* Chọn loại phòng */}
             <div className="mt-6">
               <p className="text-sm font-semibold text-neutral-600 dark:text-neutral-400 mb-3">
                 Chọn loại phòng:
@@ -45,7 +144,7 @@ export default function ListingStayDetailPage() {
               <div className="flex flex-wrap gap-2">
                 {ROOM_TYPES.map((rt, i) => (
                   <button
-                    key={i}
+                    key={rt.id}
                     onClick={() => setSelectedRoom(i)}
                     className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
                       selectedRoom === i
@@ -59,10 +158,14 @@ export default function ListingStayDetailPage() {
               </div>
             </div>
 
-            {/* Thông số phòng đang chọn */}
             <div className="mt-4 flex flex-wrap gap-2 text-sm">
+              {effectiveRoomNo ? (
+                <span className="px-3 py-1 rounded-full bg-white dark:bg-neutral-700">
+                  Phòng đã chọn: {effectiveRoomNo}
+                </span>
+              ) : null}
               <span className="px-3 py-1 rounded-full bg-white dark:bg-neutral-700">
-                {room.suc_chua}
+                {room.sucChua}
               </span>
               <span className="px-3 py-1 rounded-full bg-white dark:bg-neutral-700">
                 {room.giuong}
@@ -71,10 +174,16 @@ export default function ListingStayDetailPage() {
                 {room.tag}
               </span>
             </div>
+
+            <div className="mt-5 space-y-2 text-neutral-700 dark:text-neutral-300">
+              <p>{room.weekdayPriceLabel}</p>
+              <p>{room.weekendPriceLabel}</p>
+              {room.isBestSeller ? <p className="font-semibold">(Best seller)</p> : null}
+            </div>
           </div>
 
           <div className="rounded-3xl border border-neutral-200 dark:border-neutral-700 p-6">
-            <h2 className="text-2xl font-semibold">Tiện nghi &amp; không gian chung</h2>
+            <h2 className="text-2xl font-semibold">Tiện nghi & không gian chung</h2>
             <ul className="mt-4 grid sm:grid-cols-2 gap-3 text-neutral-700 dark:text-neutral-300">
               {tienIch.map((item) => (
                 <li
@@ -98,54 +207,72 @@ export default function ListingStayDetailPage() {
           </div>
         </section>
 
-        <aside className="rounded-3xl border border-neutral-200 dark:border-neutral-700 p-6 h-fit lg:sticky lg:top-28">
+        <aside
+          id="booking-form"
+          className="rounded-3xl border border-neutral-200 dark:border-neutral-700 p-6 h-fit lg:sticky lg:top-28"
+        >
           <p className="text-sm text-neutral-500">Giá từ</p>
-          <p className="text-3xl font-bold mt-1 text-primary-600">{room.gia}</p>
+          <p className="text-3xl font-bold mt-1 text-primary-600">{room.priceFrom}</p>
           <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
             {room.label}
           </p>
+          <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+            {room.weekdayPriceLabel}
+          </p>
+          <p className="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+            {room.weekendPriceLabel}
+          </p>
 
-          <form className="mt-5 space-y-3">
-            {/* Dropdown loại phòng trong form */}
+          <form className="mt-5 space-y-3" onSubmit={handleSubmit}>
             <select
               className="w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-4 py-3 text-neutral-700 dark:text-neutral-200"
               value={selectedRoom}
               onChange={(e) => setSelectedRoom(Number(e.target.value))}
             >
               {ROOM_TYPES.map((rt, i) => (
-                <option key={i} value={i}>
-                  {rt.label} — {rt.gia}
+                <option key={rt.id} value={i}>
+                  {rt.label} - {rt.priceFrom}
                 </option>
               ))}
             </select>
             <input
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
               className="w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-4 py-3"
               placeholder="Họ và tên"
             />
             <input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-4 py-3"
               placeholder="Số điện thoại"
             />
             <input
               type="date"
+              value={checkIn}
+              onChange={(e) => setCheckIn(e.target.value)}
               className="w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-4 py-3"
             />
             <input
               type="date"
+              value={checkOut}
+              onChange={(e) => setCheckOut(e.target.value)}
               className="w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-4 py-3"
             />
             <input
               type="number"
               min={1}
+              value={guests}
+              onChange={(e) => setGuests(Number(e.target.value))}
               className="w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-4 py-3"
               placeholder="Số khách"
             />
-            <Link
-              href="/checkout"
+            <button
+              type="submit"
               className="block text-center w-full rounded-xl bg-primary-500 hover:bg-primary-600 transition-colors text-white py-3 font-semibold"
             >
               Gửi yêu cầu đặt phòng
-            </Link>
+            </button>
           </form>
         </aside>
       </div>

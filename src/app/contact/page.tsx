@@ -11,7 +11,7 @@ export interface PageContactProps {}
 const info = [
   {
     title: "🗺 ĐỊA CHỈ",
-    desc: "12 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh",
+    desc: "Số 81 đường 510B Hoằng Tiến, Thanh Hoá",
   },
   {
     title: "💌 EMAIL",
@@ -19,19 +19,19 @@ const info = [
   },
   {
     title: "☎ ĐIỆN THOẠI",
-    desc: "000-123-456-7890",
+    desc: "0833555757",
   },
 ];
 
 const PageContact: FC<PageContactProps> = ({}) => {
   return (
-    <div className={`nc-PageContact overflow-hidden`}>
+    <div className="nc-PageContact overflow-hidden">
       <div className="mb-24 lg:mb-32">
         <h2 className="my-16 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
           Liên hệ
         </h2>
         <div className="container max-w-7xl mx-auto">
-          <div className="flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 gap-12 ">
+          <div className="flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 gap-12">
             <div className="max-w-sm space-y-8">
               {info.map((item, index) => (
                 <div key={index}>
@@ -54,7 +54,6 @@ const PageContact: FC<PageContactProps> = ({}) => {
               <form className="grid grid-cols-1 gap-6" action="#" method="post">
                 <label className="block">
                   <Label>Họ và tên</Label>
-
                   <Input
                     placeholder="Ví dụ: Nguyễn Văn A"
                     type="text"
@@ -63,7 +62,6 @@ const PageContact: FC<PageContactProps> = ({}) => {
                 </label>
                 <label className="block">
                   <Label>Địa chỉ email</Label>
-
                   <Input
                     type="email"
                     placeholder="example@example.com"
@@ -72,7 +70,6 @@ const PageContact: FC<PageContactProps> = ({}) => {
                 </label>
                 <label className="block">
                   <Label>Tin nhắn</Label>
-
                   <Textarea className="mt-1" rows={6} />
                 </label>
                 <div>
@@ -84,7 +81,6 @@ const PageContact: FC<PageContactProps> = ({}) => {
         </div>
       </div>
 
-      {/* OTHER SECTIONS */}
       <div className="container">
         <SectionSubscribe2 className="pb-24 lg:pb-32" />
       </div>
@@ -93,3 +89,4 @@ const PageContact: FC<PageContactProps> = ({}) => {
 };
 
 export default PageContact;
+

@@ -5,12 +5,13 @@ import {
   MagnifyingGlassIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { PathName } from "@/routers/types";
 import MenuBar from "@/shared/MenuBar";
 import isInViewport from "@/utils/isInViewport";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 
 let WIN_PREV_POSITION = 0;
 if (typeof window !== "undefined") {
@@ -23,37 +24,45 @@ interface NavItem {
   icon: any;
 }
 
-const NAV: NavItem[] = [
-  {
-    name: "Trang chủ",
-    link: "/home-2",
-    icon: MagnifyingGlassIcon,
-  },
-  {
-    name: "Phòng",
-    link: "/listing-stay",
-    icon: HeartIcon,
-  },
-  {
-    name: "Đặt phòng",
-    link: "/listing-stay-detail",
-    icon: UserCircleIcon,
-  },
-  {
-    name: "Menu",
-    icon: MenuBar,
-  },
-];
-
 const FooterNav = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-
   const pathname = usePathname();
+  const { isAdmin } = useAdminAuth();
+
+  const nav: NavItem[] = useMemo(
+    () => [
+      {
+        name: "Trang chủ",
+        link: "/home-2",
+        icon: MagnifyingGlassIcon,
+      },
+      {
+        name: "Phòng",
+        link: "/listing-stay",
+        icon: HeartIcon,
+      },
+      {
+        name: isAdmin ? "Đơn" : "Đặt phòng",
+        link: isAdmin ? "/admin/bookings" : "/listing-stay-detail",
+        icon: UserCircleIcon,
+      },
+      {
+        name: "Menu",
+        icon: MenuBar,
+      },
+    ],
+    [isAdmin]
+  );
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", handleEvent);
     }
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("scroll", handleEvent);
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -64,14 +73,9 @@ const FooterNav = () => {
   };
 
   const showHideHeaderMenu = () => {
-    // if (typeof window === "undefined" || window?.innerWidth >= 768) {
-    //   return null;
-    // }
-
-    let currentScrollPos = window.pageYOffset;
+    const currentScrollPos = window.pageYOffset;
     if (!containerRef.current) return;
 
-    // SHOW _ HIDE MAIN MENU
     if (currentScrollPos > WIN_PREV_POSITION) {
       if (
         isInViewport(containerRef.current) &&
@@ -79,7 +83,6 @@ const FooterNav = () => {
       ) {
         return;
       }
-
       containerRef.current.classList.add("FooterNav--hide");
     } else {
       if (
@@ -121,7 +124,7 @@ const FooterNav = () => {
           isActive ? "text-neutral-900 dark:text-neutral-100" : ""
         }`}
       >
-        <item.icon iconClassName="w-6 h-6" className={``} />
+        <item.icon iconClassName="w-6 h-6" className="" />
         <span className="text-[11px] leading-none mt-1">{item.name}</span>
       </div>
     );
@@ -130,15 +133,14 @@ const FooterNav = () => {
   return (
     <div
       ref={containerRef}
-      className="FooterNav block md:!hidden p-2 bg-white dark:bg-neutral-800 fixed top-auto bottom-0 inset-x-0 z-30 border-t border-neutral-300 dark:border-neutral-700 
-      transition-transform duration-300 ease-in-out"
+      className="FooterNav block md:!hidden p-2 bg-white dark:bg-neutral-800 fixed top-auto bottom-0 inset-x-0 z-30 border-t border-neutral-300 dark:border-neutral-700 transition-transform duration-300 ease-in-out"
     >
-      <div className="w-full max-w-lg flex justify-around mx-auto text-sm text-center ">
-        {/* MENU */}
-        {NAV.map(renderItem)}
+      <div className="w-full max-w-lg flex justify-around mx-auto text-sm text-center">
+        {nav.map(renderItem)}
       </div>
     </div>
   );
 };
 
 export default FooterNav;
+

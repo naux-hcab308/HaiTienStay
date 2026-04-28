@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "supabase:upload-images": "node scripts/upload-images-to-supabase.mjs",
+    "supabase:upload-images:dry": "node scripts/upload-images-to-supabase.mjs --dry-run"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",

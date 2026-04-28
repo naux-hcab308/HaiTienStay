@@ -12,7 +12,7 @@ export interface PageLoginProps {}
 const loginSocials = [
   {
     name: "Continue with Facebook",
-    href: "#",
+    href: "https://www.facebook.com/share/p/1EGihJaERL/",
     icon: facebookSvg,
   },
   {
