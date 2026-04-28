@@ -35,13 +35,13 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", children }) => {
       </div>
       <div className="relative hidden sm:block py-14 lg:py-20">
         <div className="relative inline-flex">
-          <div className="w-screen right-20 md:right-52 inset-y-0 absolute bg-primary-500" />
-          <div className="relative max-w-3xl inline-flex flex-shrink-0 flex-col items-start py-16 sm:py-20 lg:py-24 space-y-8 sm:space-y-10 text-white">
+          <div className="absolute inset-y-0 right-0 w-screen bg-primary-500" />
+          <div className="relative inline-flex max-w-4xl flex-shrink-0 flex-col items-start space-y-8 py-16 text-white sm:space-y-10 sm:py-20 lg:py-24">
             {children ? (
               children
             ) : (
-              <h2 className="font-semibold text-4xl md:text-5xl xl:text-7xl !leading-[110%]">
-                Yara - góc nhỏ yên lành tại Hải Tiến
+              <h2 className="font-semibold text-4xl !leading-[110%] md:text-5xl xl:text-6xl">
+                Yara - góc nhỏ yên{"\u00A0"}lành tại Hải Tiến
               </h2>
             )}
           </div>
