@@ -1,13 +1,16 @@
 "use client";
 
 import React, { FormEvent, useState } from "react";
+import type { Route } from "next";
 import { useRouter, useSearchParams } from "next/navigation";
 import { isAdminAuthenticated, loginAdmin } from "@/utils/adminAuth";
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const nextUrl = searchParams.get("next") || "/admin/bookings";
+  const nextParam = searchParams.get("next");
+  // Only allow internal navigations; fallback to a safe admin page.
+  const nextUrl = (nextParam && nextParam.startsWith("/") ? nextParam : "/admin/bookings") as Route;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
