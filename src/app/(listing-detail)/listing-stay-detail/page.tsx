@@ -1,5 +1,6 @@
 "use client";
 
+import type { Route } from "next";
 import React, { FormEvent, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { addBooking } from "@/utils/bookingStorage";
@@ -53,9 +54,7 @@ export default function ListingStayDetailPage() {
     }
 
     const nextQuery = params.toString();
-    router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, {
-      scroll: false,
-    });
+    router.replace((nextQuery ? `${pathname}?${nextQuery}` : pathname) as Route);
   };
 
   const handleSubmit = (e: FormEvent) => {

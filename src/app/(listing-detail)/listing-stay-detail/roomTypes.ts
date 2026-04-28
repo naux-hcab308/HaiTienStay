@@ -1,4 +1,17 @@
-export const ROOM_TYPES = [
+export interface RoomType {
+  id: string;
+  label: string;
+  sucChua: string;
+  giuong: string;
+  tag: string;
+  weekdayPriceLabel: string;
+  weekendPriceLabel: string;
+  priceFrom: string;
+  roomNos: string[];
+  isBestSeller: boolean;
+}
+
+export const ROOM_TYPES: RoomType[] = [
   {
     id: "room-2",
     label: "Phòng đôi (2 người)",
@@ -59,7 +72,7 @@ export const ROOM_TYPES = [
     roomNos: ["P106"],
     isBestSeller: false,
   },
-] as const;
+];
 
 export function getSelectedIndexByRoomNo(roomNo: string | null) {
   if (!roomNo) return 0;
