@@ -7,12 +7,12 @@ import NotifyDropdown from "./NotifyDropdown";
 import AvatarDropdown from "./AvatarDropdown";
 import MenuBar from "@/shared/MenuBar";
 import { SearchTab } from "../(HeroSearchForm)/HeroSearchForm";
-import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HeroSearchFormSmall from "../(HeroSearchFormSmall)/HeroSearchFormSmall";
 import { StaySearchFormFields } from "../type";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import ButtonPrimary from "@/shared/ButtonPrimary";
 
 interface Header3Props {
   className?: string;
@@ -163,6 +163,16 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
         ></div>
         <div className="relative px-4 lg:container h-[88px] flex">
           <div className="flex-1 flex justify-between">
+            <div className="flex md:hidden items-center justify-between flex-1 gap-3">
+              <Logo className="w-24 flex-shrink-0" />
+              <ButtonPrimary
+                className="px-4 py-2 text-sm whitespace-nowrap"
+                href="/listing-stay-detail"
+              >
+                Đặt phòng
+              </ButtonPrimary>
+            </div>
+
             {/* Logo (lg+) */}
             <div className="relative z-10 hidden md:flex flex-1 items-center">
               <Logo />
@@ -171,9 +181,6 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
             <div className="flex flex-[2] lg:flex-none mx-auto">
               <div className="flex-1 hidden lg:flex self-center">
                 {renderButtonOpenHeroSearch()}
-              </div>
-              <div className="self-center flex-1 lg:hidden w-full max-w-lg mx-auto">
-                <HeroSearchForm2MobileFactory />
               </div>
               {renderHeroSearch()}
             </div>

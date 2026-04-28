@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  HeartIcon,
-  MagnifyingGlassIcon,
-  UserCircleIcon,
+  BuildingOffice2Icon,
+  CalendarDaysIcon,
+  HomeIcon,
 } from "@heroicons/react/24/outline";
 import React, { useEffect, useMemo, useRef } from "react";
 import { PathName } from "@/routers/types";
@@ -34,17 +34,17 @@ const FooterNav = () => {
       {
         name: "Trang chủ",
         link: "/home-2",
-        icon: MagnifyingGlassIcon,
+        icon: HomeIcon,
       },
       {
         name: "Phòng",
         link: "/listing-stay",
-        icon: HeartIcon,
+        icon: BuildingOffice2Icon,
       },
       {
         name: isAdmin ? "Đơn" : "Đặt phòng",
         link: isAdmin ? "/admin/bookings" : "/listing-stay-detail",
-        icon: UserCircleIcon,
+        icon: CalendarDaysIcon,
       },
       {
         name: "Menu",

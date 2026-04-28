@@ -15,8 +15,6 @@ import rightImgPng from "@/images/haitien/garden-1.jpg";
 
 import SectionGridFeatureProperty from "../SectionGridFeatureProperty";
 import SectionHero2 from "@/app/(server-components)/SectionHero2";
-import Image from "next/image";
-
 const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "1",
@@ -82,12 +80,11 @@ const DEMO_CATS_2: TaxonomyType[] = [
 function PageHome2() {
   return (
     <main className="nc-PageHome2 relative overflow-hidden">
-      <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
+      <div className="container relative space-y-16 pb-24 pt-4 sm:space-y-20 lg:space-y-28 lg:mb-28 lg:pt-0">
         <SectionHero2 className="" />
 
-
-
         <SectionHowItWork
+          className="relative z-10"
           data={[
             {
               id: 1,
@@ -113,14 +110,21 @@ function PageHome2() {
           ]}
         />
 
-        <div className="relative py-16">
-          <BackgroundSection />
+        <div className="relative py-4 sm:py-8 lg:py-16">
+          <div className="hidden sm:block">
+            <BackgroundSection />
+          </div>
           <SectionGridFeatureProperty />
         </div>
 
-        <SectionOurFeatures type="type2" rightImg={rightImgPng} />
+        <SectionOurFeatures
+          className="rounded-[28px] bg-neutral-50 p-5 dark:bg-neutral-900 sm:p-8 lg:py-14 lg:px-0"
+          type="type2"
+          rightImg={rightImgPng}
+        />
 
         <SectionSliderNewCategories
+          className="pb-6"
           categories={DEMO_CATS_2}
           categoryCardType="card4"
           itemPerRow={4}

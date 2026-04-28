@@ -5,8 +5,9 @@ import { useParams } from "next/navigation";
 import { getGuestPostBySlug } from "@/utils/guestPostStorage";
 
 export default function BlogDetailPage() {
-  const params = useParams<{ slug: string[] }>();
-  const slug = params?.slug?.[0] || "";
+  const params = useParams();
+  const slugParam = params?.slug;
+  const slug = Array.isArray(slugParam) ? slugParam[0] || "" : slugParam || "";
   const bai = getGuestPostBySlug(slug);
 
   const fallback = {

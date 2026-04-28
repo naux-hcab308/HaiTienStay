@@ -1,46 +1,54 @@
-import React, { useState } from "react";
-import ModalSelectDate from "@/components/ModalSelectDate";
+import React, { useMemo } from "react";
 import ButtonPrimary from "@/shared/ButtonPrimary";
-import converSelectedDateToString from "@/utils/converSelectedDateToString";
-import ModalReserveMobile from "./ModalReserveMobile";
+import { usePathname, useSearchParams } from "next/navigation";
+import {
+  getSelectedIndexByRoomNo,
+  ROOM_TYPES,
+} from "../listing-stay-detail/roomTypes";
 
 const MobileFooterSticky = () => {
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/02/06")
-  );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const selectedRoomNo = (searchParams.get("room") || "").toUpperCase();
+  const room = useMemo(() => {
+    const selectedIndex = getSelectedIndexByRoomNo(selectedRoomNo || null);
+    return ROOM_TYPES[selectedIndex];
+  }, [selectedRoomNo]);
+
+  const effectiveRoomNo = useMemo(() => {
+    if (selectedRoomNo && room.roomNos.includes(selectedRoomNo)) {
+      return selectedRoomNo;
+    }
+    return room.roomNos[0] || "";
+  }, [room, selectedRoomNo]);
+
+  const handleOpenBookingForm = () => {
+    const bookingForm = document.getElementById("booking-form");
+    bookingForm?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  if (!pathname?.includes("/listing-stay-detail")) {
+    return null;
+  }
 
   return (
     <div className="block lg:hidden fixed bottom-0 inset-x-0 py-2 sm:py-3 bg-white dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-6000 z-40">
       <div className="container flex items-center justify-between">
         <div className="">
-          <span className="block text-xl font-semibold">
-            $311
-            <span className="ml-1 text-sm font-normal text-neutral-500 dark:text-neutral-400">
-              /night
-            </span>
+          <span className="block text-lg font-semibold text-primary-600">
+            {room.priceFrom}
           </span>
-          <ModalSelectDate
-            renderChildren={({ openModal }) => (
-              <span
-                onClick={openModal}
-                className="block text-sm underline font-medium"
-              >
-                {converSelectedDateToString([startDate, endDate])}
-              </span>
-            )}
-          />
+          <span className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            {effectiveRoomNo ? `${room.label} • ${effectiveRoomNo}` : room.label}
+          </span>
         </div>
-        <ModalReserveMobile
-          renderChildren={({ openModal }) => (
-            <ButtonPrimary
-              sizeClass="px-5 sm:px-7 py-3 !rounded-2xl"
-              onClick={openModal}
-            >
-              Reserve
-            </ButtonPrimary>
-          )}
-        />
+        <ButtonPrimary
+          sizeClass="px-5 sm:px-7 py-3 !rounded-2xl"
+          onClick={handleOpenBookingForm}
+        >
+          Đặt phòng
+        </ButtonPrimary>
       </div>
     </div>
   );

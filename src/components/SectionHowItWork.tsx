@@ -50,7 +50,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
       <Heading isCenter desc="Chỉ với 3 bước đơn giản">
         Thao tác dễ dàng
       </Heading>
-      <div className="mt-20 relative grid md:grid-cols-3 gap-20">
+      <div className="mt-10 relative grid gap-5 md:mt-20 md:grid-cols-3 md:gap-20">
         <Image
           className="hidden md:block absolute inset-x-0 top-10"
           src={VectorImg}
@@ -59,31 +59,31 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
         {data.map((item) => (
           <div
             key={item.id}
-            className="relative flex flex-col items-center max-w-xs mx-auto"
+            className="relative flex flex-col items-center max-w-xs mx-auto rounded-3xl border border-neutral-200 bg-white p-6 text-center shadow-sm dark:border-neutral-800 dark:bg-neutral-900 md:rounded-none md:border-none md:bg-transparent md:p-0 md:shadow-none"
           >
             {item.imgDark ? (
               <>
                 <Image
-                  className="dark:hidden block mb-8 max-w-[180px] mx-auto"
+                  className="dark:hidden block mb-6 max-w-[140px] md:mb-8 md:max-w-[180px] mx-auto"
                   src={item.img}
                   alt=""
                 />
                 <Image
                   alt=""
-                  className="hidden dark:block mb-8 max-w-[180px] mx-auto"
+                  className="hidden dark:block mb-6 max-w-[140px] md:mb-8 md:max-w-[180px] mx-auto"
                   src={item.imgDark}
                 />
               </>
             ) : (
               <Image
                 alt=""
-                className="mb-8 max-w-[180px] mx-auto"
+                className="mb-6 max-w-[140px] md:mb-8 md:max-w-[180px] mx-auto"
                 src={item.img}
               />
             )}
             <div className="text-center mt-auto">
-              <h3 className="text-xl font-semibold">{item.title}</h3>
-              <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
+              <h3 className="text-lg md:text-xl font-semibold">{item.title}</h3>
+              <span className="block mt-3 md:mt-5 text-sm md:text-base text-neutral-500 dark:text-neutral-400">
                 {item.desc}
               </span>
             </div>

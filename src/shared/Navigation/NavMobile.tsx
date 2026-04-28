@@ -109,8 +109,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
         <Logo />
         <div className="flex flex-col mt-5 text-neutral-700 dark:text-neutral-300 text-sm">
           <span>
-            Discover the most outstanding articles on all topics of life. Write
-            your stories and share them
+            Hải Tiến Stay - Đặt phòng nhanh chóng, tiện lợi 
           </span>
 
           <div className="flex justify-between items-center mt-4">
@@ -134,13 +133,9 @@ const NavMobile: React.FC<NavMobileProps> = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          <ButtonPrimary>Get Template</ButtonPrimary>
+          <ButtonPrimary>Đặt phòng ngay</ButtonPrimary>
         </a>
 
-        <LangDropdown
-          className="flex"
-          panelClassName="z-10 w-screen max-w-[280px] px-4 mb-3 right-3 bottom-full sm:px-0"
-        />
       </div>
     </div>
   );
