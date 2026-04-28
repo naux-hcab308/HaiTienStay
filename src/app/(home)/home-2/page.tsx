@@ -21,38 +21,34 @@ const DEMO_CATS_2: TaxonomyType[] = [
   {
     id: "1",
     href: "/home-2",
-    name: "Sáng sớm đón gió biển Hải Tiến",
+    name: "Bếp nấu ăn",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/5764100/pexels-photo-5764100.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    thumbnail: "/haitien/chill-cafe-1.jpg",
   },
   {
     id: "2",
     href: "/home-2",
-    name: "Không gian nghỉ ngơi thoáng mở",
+    name: "Góc chill cafe",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/2869499/pexels-photo-2869499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    thumbnail: "/haitien/chill-cafe-2.jpg",
   },
   {
     id: "3",
     href: "/home-2",
-    name: "Phòng ấm cúng cho gia đình nhỏ",
+    name: "Không gian thoáng mở",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/7031413/pexels-photo-7031413.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    thumbnail: "/haitien/chill-cafe-3.jpg",
   },
   {
     id: "4",
     href: "/home-2",
-    name: "Sân vườn xanh và khu BBQ",
+    name: "Tụ họp gia đình",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/247532/pexels-photo-247532.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    thumbnail: "/haitien/chill-cafe-4.jpg",
   },
   {
     id: "5",
@@ -130,14 +126,6 @@ function PageHome2() {
           itemPerRow={4}
           heading="Gợi ý trải nghiệm nổi bật"
           subHeading="Những không gian được khách lưu trú yêu thích tại Yara"
-        />
-
-
-        <SectionSliderNewCategories
-          heading="Khám phá không gian homestay"
-          subHeading="Tổng hợp các khu vực nghỉ ngơi, sinh hoạt chung và góc check-in đẹp"
-          categoryCardType="card5"
-          itemPerRow={5}
         />
 
       </div>

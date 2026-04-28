@@ -8,28 +8,33 @@ export default function PageAbout() {
           Giới thiệu Hải Tiến Stay
         </h1>
         <p className="mt-4 text-neutral-700 dark:text-neutral-300 max-w-3xl">
-          Hải Tiến Stay là homestay nhỏ nằm gần biển Hải Tiến, vận hành theo mô
-          hình tinh gọn với 1 hạng phòng duy nhất và 8 phòng giống nhau. Chúng
-          tôi tập trung vào trải nghiệm nghỉ dưỡng yên tĩnh, sạch sẽ, thân thiện
-          và gần gũi thiên nhiên.
+          Yara Hải Tiến là homestay xinh xắn nằm cách biển chỉ khoảng 500m, đủ
+          gần để bạn dễ dàng dạo biển nhưng vẫn giữ được sự yên tĩnh, thư giãn.
+          Không gian nơi đây nổi bật với sân vườn xanh mát, thiết kế theo phong
+          cách mộc mạc nhưng tinh tế, kết hợp gạch thô, cây xanh và những chi
+          tiết trang trí đầy cảm xúc. Homestay có đầy đủ tiện ích như quầy bar,
+          khu bếp để tự nấu, mang lại cảm giác gần gũi như ở nhà. Điểm khác
+          biệt của Yara là chú trọng trải nghiệm khách hàng: chỉ cần thuê phòng
+          đã bao gồm bữa sáng và dịch vụ đưa đón tham quan các địa điểm nổi
+          tiếng tại Hải Tiến, giúp bạn tận hưởng kỳ nghỉ trọn vẹn nhất.
         </p>
       </section>
 
       <section className="grid md:grid-cols-2 gap-4">
         <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
-          <h2 className="text-xl font-semibold">Vai trò 1: Khách</h2>
+          <h2 className="text-xl font-semibold">Biển Hải Tiến</h2>
           <ul className="mt-3 space-y-2 text-neutral-700 dark:text-neutral-300">
-            <li>- Xem thông tin phòng và kiểm tra giá.</li>
-            <li>- Gửi yêu cầu đặt phòng nhanh trên website.</li>
-            <li>- Viết blog chia sẻ trải nghiệm sau chuyến đi.</li>
+            <li>- Bãi biển dài, thoải và sạch, phù hợp tắm biển và dạo bộ.</li>
+            <li>- Bình minh và hoàng hôn đẹp, thích hợp check-in, nghỉ ngơi.</li>
+            <li>- Khu vực quanh biển có nhiều quán ăn hải sản địa phương.</li>
           </ul>
         </div>
         <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
-          <h2 className="text-xl font-semibold">Vai trò 2: Quản trị homestay</h2>
+          <h2 className="text-xl font-semibold">Đền thờ Tô Hiến Thành</h2>
           <ul className="mt-3 space-y-2 text-neutral-700 dark:text-neutral-300">
-            <li>- Quản lý 8 phòng của hạng phòng tiêu chuẩn.</li>
-            <li>- Xác nhận lịch đặt phòng và hỗ trợ khách.</li>
-            <li>- Duyệt các bài blog trải nghiệm từ khách lưu trú.</li>
+            <li>- Di tích lịch sử văn hóa gắn với danh nhân Tô Hiến Thành.</li>
+            <li>- Không gian đền cổ kính, yên tĩnh, phù hợp tham quan tâm linh.</li>
+            <li>- Là điểm dừng chân ý nghĩa khi khám phá Hải Tiến - Hoằng Hóa.</li>
           </ul>
         </div>
       </section>

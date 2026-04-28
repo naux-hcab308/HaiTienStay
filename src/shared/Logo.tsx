@@ -1,23 +1,19 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logoImg from "@/images/haitien/logo.jpg";
-import { getSupabasePublicAssetUrl } from "@/utils/supabaseStorage";
+import logoImg from "@/images/haitien/logo.png";
 
 export interface LogoProps {
   className?: string;
 }
 
 const Logo: React.FC<LogoProps> = ({ className = "w-48" }) => {
-  const logoSrc =
-    process.env.NEXT_PUBLIC_SUPABASE_LOGO_URL ||
-    getSupabasePublicAssetUrl("logo.jpg") ||
-    logoImg;
+  const customLogoSrc = process.env.NEXT_PUBLIC_SUPABASE_LOGO_URL?.trim();
+  const customLogoLightSrc =
+    process.env.NEXT_PUBLIC_SUPABASE_LOGO_LIGHT_URL?.trim();
 
-  const logoLightSrc =
-    process.env.NEXT_PUBLIC_SUPABASE_LOGO_LIGHT_URL ||
-    getSupabasePublicAssetUrl("logo.jpg") ||
-    logoImg;
+  const logoSrc = customLogoSrc || logoImg;
+  const logoLightSrc = customLogoLightSrc || logoSrc;
 
   return (
     <Link

@@ -1,34 +1,52 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
-
-const baiVietMau = [
-  {
-    slug: "binh-minh-hai-tien",
-    tieuDe: "Bình minh ở biển Hải Tiến và ly cafe đầu ngày",
-    tacGia: "Lan Anh",
-    ngay: "26/04/2026",
-    tomTat:
-      "Mình dậy sớm để ngắm mặt trời lên, gió biển mát và không gian chung của homestay cực kỳ chill.",
-  },
-  {
-    slug: "cuoi-tuan-cung-gia-dinh",
-    tieuDe: "Cuối tuần nhẹ nhàng cùng gia đình 5 người",
-    tacGia: "Minh Quân",
-    ngay: "24/04/2026",
-    tomTat:
-      "Phòng nhỏ gọn nhưng sạch sẽ, khu bếp chung rất tiện để cả nhà nấu ăn buổi tối.",
-  },
-  {
-    slug: "dem-bbq-ben-gio-bien",
-    tieuDe: "Đêm BBQ bên gió biển",
-    tacGia: "Thu Hà",
-    ngay: "20/04/2026",
-    tomTat:
-      "Điểm mình thích nhất là sân vườn mở và khu BBQ, lên đèn buổi tối rất đẹp để chụp ảnh.",
-  },
-];
+import {
+  addGuestPost,
+  getGuestPostEventName,
+  getPublishedGuestPosts,
+} from "@/utils/guestPostStorage";
 
 export default function BlogPage() {
+  const [posts, setPosts] = React.useState(getPublishedGuestPosts());
+  const [authorName, setAuthorName] = React.useState("");
+  const [title, setTitle] = React.useState("");
+  const [content, setContent] = React.useState("");
+  const [message, setMessage] = React.useState("");
+
+  React.useEffect(() => {
+    const sync = () => setPosts(getPublishedGuestPosts());
+    sync();
+    window.addEventListener(getGuestPostEventName(), sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener(getGuestPostEventName(), sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!authorName.trim() || !title.trim() || !content.trim()) {
+      setMessage("Vui lòng điền đầy đủ họ tên, tiêu đề và nội dung.");
+      return;
+    }
+
+    addGuestPost({ authorName, title, content });
+    setAuthorName("");
+    setTitle("");
+    setContent("");
+    setMessage("Đã gửi bài viết. Admin sẽ duyệt trước khi hiển thị công khai.");
+  };
+
+  const formatDate = (iso: string) =>
+    new Date(iso).toLocaleDateString("vi-VN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
   return (
     <main className="container py-10 lg:py-16 space-y-8">
       <section className="rounded-3xl bg-neutral-100 dark:bg-neutral-800 p-8">
@@ -42,19 +60,19 @@ export default function BlogPage() {
       </section>
 
       <section className="grid lg:grid-cols-3 gap-4">
-        {baiVietMau.map((bai) => (
+        {posts.map((bai) => (
           <article
             key={bai.slug}
             className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5"
           >
             <p className="text-xs text-neutral-500">
-              {bai.ngay} · {bai.tacGia}
+              {formatDate(bai.createdAt)} · {bai.authorName}
             </p>
             <h2 className="mt-2 text-xl font-semibold leading-snug">
-              {bai.tieuDe}
+              {bai.title}
             </h2>
             <p className="mt-3 text-neutral-600 dark:text-neutral-300">
-              {bai.tomTat}
+              {bai.summary}
             </p>
             <Link
               href={`/blog/${bai.slug}`}
@@ -69,23 +87,34 @@ export default function BlogPage() {
       <section className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
         <h2 className="text-2xl font-semibold">Viết blog trải nghiệm</h2>
         <p className="mt-2 text-neutral-600 dark:text-neutral-300">
-          Mẫu gửi nhanh cho khách (phiên bản demo giao diện).
+          Gửi cảm nhận của bạn. Bài viết sẽ hiển thị sau khi admin phê duyệt.
         </p>
-        <form className="mt-4 grid md:grid-cols-2 gap-3">
+        <form className="mt-4 grid md:grid-cols-2 gap-3" onSubmit={handleSubmit}>
           <input
+            value={authorName}
+            onChange={(e) => setAuthorName(e.target.value)}
             className="rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-4 py-3"
             placeholder="Họ và tên"
           />
           <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             className="rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-4 py-3"
             placeholder="Tiêu đề bài viết"
           />
           <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
             className="md:col-span-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-4 py-3 min-h-[140px]"
             placeholder="Chia sẻ trải nghiệm của bạn..."
           />
+          {message ? (
+            <p className="md:col-span-2 text-sm text-blue-600 dark:text-blue-400">
+              {message}
+            </p>
+          ) : null}
           <button
-            type="button"
+            type="submit"
             className="md:col-span-2 rounded-xl bg-blue-600 text-white py-3 font-semibold"
           >
             Gửi bài viết

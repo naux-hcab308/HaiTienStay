@@ -62,6 +62,13 @@ export default function AdminBookingsPage() {
         <div className="flex items-center gap-2">
           <button
             type="button"
+            onClick={() => router.push("/admin/blog-posts")}
+            className="px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 text-sm"
+          >
+            Duyệt blog
+          </button>
+          <button
+            type="button"
             onClick={handleClear}
             className="px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 text-sm"
           >
