@@ -95,23 +95,7 @@ const viTriTuyenDung = [
       "Tư duy sáng tạo, yêu thích nhiếp ảnh và du lịch.",
     ],
   },
-  {
-    title: "Quản lý Vận hành Homestay",
-    type: "Toàn thời gian",
-    level: "Có kinh nghiệm từ 2 năm trở lên",
-    thu_nhap: "Trao đổi khi phỏng vấn",
-    mo_ta: [
-      "Giám sát toàn bộ hoạt động hàng ngày của homestay.",
-      "Quản lý nhân sự ca kíp, phân công công việc.",
-      "Xử lý khiếu nại, phản hồi của khách hàng.",
-      "Báo cáo doanh thu, tình trạng phòng cho ban quản lý.",
-    ],
-    yeu_cau: [
-      "Kinh nghiệm quản lý nhà nghỉ/homestay/khách sạn nhỏ.",
-      "Kỹ năng lãnh đạo, giải quyết vấn đề tốt.",
-      "Thành thạo Excel, phần mềm quản lý đặt phòng.",
-    ],
-  },
+
 ];
 
 export default function TuyenDungPage() {

@@ -1,12 +1,11 @@
 import React, { FC } from "react";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
 import SocialsList from "@/shared/SocialsList";
 import Label from "@/components/Label";
 import Input from "@/shared/Input";
 import Textarea from "@/shared/Textarea";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 
-export interface PageContactProps {}
+export interface PageContactProps { }
 
 const info = [
   {
@@ -14,16 +13,16 @@ const info = [
     desc: "Số 81 đường 510B Hoằng Tiến, Thanh Hoá",
   },
   {
-    title: "💌 EMAIL",
-    desc: "nc.example@example.com",
+    title: "💌 GMAIL",
+    desc: "yarahaitien@gmail.com",
   },
   {
     title: "☎ ĐIỆN THOẠI",
-    desc: "0833555757",
+    desc: "08.33.55.57.57",
   },
 ];
 
-const PageContact: FC<PageContactProps> = ({}) => {
+const PageContact: FC<PageContactProps> = ({ }) => {
   return (
     <div className="nc-PageContact overflow-hidden">
       <div className="mb-24 lg:mb-32">
@@ -79,12 +78,7 @@ const PageContact: FC<PageContactProps> = ({}) => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="container">
-        <SectionSubscribe2 className="pb-24 lg:pb-32" />
-      </div>
-    </div>
+      </div>    </div>
   );
 };
 
