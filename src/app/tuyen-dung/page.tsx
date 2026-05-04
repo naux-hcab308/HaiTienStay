@@ -48,6 +48,7 @@ const viTriTuyenDung = [
     title: "Nhân viên Lễ tân – Chăm sóc khách",
     type: "Toàn thời gian",
     level: "Mới tốt nghiệp / Có kinh nghiệm",
+    thu_nhap: "Trao đổi khi phỏng vấn",
     mo_ta: [
       "Đón tiếp, check-in/check-out khách lưu trú.",
       "Hỗ trợ khách trong suốt thời gian lưu trú.",
@@ -64,6 +65,7 @@ const viTriTuyenDung = [
     title: "Nhân viên Buồng phòng – Vệ sinh",
     type: "Toàn thời gian / Bán thời gian",
     level: "Không yêu cầu kinh nghiệm",
+    thu_nhap: "Trao đổi khi phỏng vấn",
     mo_ta: [
       "Dọn dẹp, vệ sinh phòng ngủ trước và sau khi khách trả phòng.",
       "Giặt là ga giường, khăn tắm và đồ vải.",
@@ -80,6 +82,7 @@ const viTriTuyenDung = [
     title: "Nhân viên Marketing – Content Mạng xã hội",
     type: "Toàn thời gian",
     level: "Có kinh nghiệm từ 1 năm trở lên",
+    thu_nhap: "Trao đổi khi phỏng vấn",
     mo_ta: [
       "Quản lý Fanpage Facebook, TikTok, Instagram của Yara.",
       "Sáng tạo nội dung ảnh, video giới thiệu phòng và trải nghiệm.",
@@ -96,6 +99,7 @@ const viTriTuyenDung = [
     title: "Quản lý Vận hành Homestay",
     type: "Toàn thời gian",
     level: "Có kinh nghiệm từ 2 năm trở lên",
+    thu_nhap: "Trao đổi khi phỏng vấn",
     mo_ta: [
       "Giám sát toàn bộ hoạt động hàng ngày của homestay.",
       "Quản lý nhân sự ca kíp, phân công công việc.",
@@ -207,6 +211,9 @@ export default function TuyenDungPage() {
                       </span>
                       <span className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 text-xs font-medium">
                         {vt.level}
+                      </span>
+                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-xs font-medium">
+                        💰 Thu nhập: {vt.thu_nhap}
                       </span>
                     </div>
                   </div>

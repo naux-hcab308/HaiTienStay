@@ -144,10 +144,11 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
           <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
             <div className="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden">
               <Image
-                alt=""
+                alt="Phòng Yara Homestay"
                 fill
                 sizes="500px"
-                src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                className="object-cover"
+                src="/haitien/bedroom-1.jpg"
               />
             </div>
             <div className="space-y-2 text-sm">

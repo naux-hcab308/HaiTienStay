@@ -1,4 +1,4 @@
-﻿type TravelSpot = {
+type TravelSpot = {
   name: string;
   mapUrl: string;
   shortIntro: string;
@@ -58,16 +58,16 @@ const getQrUrl = (mapUrl: string) =>
 export default function PageDuLich() {
   return (
     <main className="nc-PageDuLich relative overflow-hidden">
-      <div className="bg-gradient-to-b from-orange-50 to-white">
+      <div className="bg-gradient-to-b from-orange-50 to-white dark:from-neutral-900 dark:to-neutral-900">
         <div className="container pt-10 pb-8 sm:pt-14 sm:pb-12">
-          <div className="mx-auto max-w-4xl rounded-3xl border border-orange-100 bg-white p-6 shadow-sm sm:p-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-orange-600">
+          <div className="mx-auto max-w-4xl rounded-3xl border border-orange-100 bg-white p-6 shadow-sm sm:p-10 dark:border-neutral-700 dark:bg-neutral-800">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-orange-600 dark:text-orange-400">
               Du lịch Hải Tiến
             </p>
-            <h1 className="mt-3 text-3xl font-semibold leading-tight text-neutral-900 sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-semibold leading-tight text-neutral-900 sm:text-4xl dark:text-neutral-100">
               6 điểm đến nên ghé khi lưu trú tại Yara
             </h1>
-            <p className="mt-4 text-base leading-7 text-neutral-700 sm:text-lg">
+            <p className="mt-4 text-base leading-7 text-neutral-700 sm:text-lg dark:text-neutral-300">
               Đây là bộ sưu tập địa điểm nổi bật quanh khu vực Hải Tiến dành cho
               khách lưu trú tại Yara. Mỗi ô bên dưới đều có mã QR mở trực tiếp
               Google Maps để bạn di chuyển nhanh, không cần nhập lại địa chỉ.
@@ -77,7 +77,7 @@ export default function PageDuLich() {
         </div>
       </div>
 
-      <div className="container pb-16 sm:pb-24">
+      <div className="container pb-16 sm:pb-24 dark:bg-neutral-900">
         <div className="space-y-6 sm:space-y-8">
           {TRAVEL_SPOTS.map((spot, index) => {
             const textOrder = index % 2 === 0 ? "md:order-1" : "md:order-2";
@@ -86,7 +86,7 @@ export default function PageDuLich() {
             return (
               <section
                 key={spot.name}
-                className="grid grid-cols-1 items-stretch gap-5 rounded-3xl border border-orange-100 bg-white p-4 shadow-sm sm:p-6 md:grid-cols-3 md:gap-6"
+                className="grid grid-cols-1 items-stretch gap-5 rounded-3xl border border-orange-100 bg-white p-4 shadow-sm sm:p-6 md:grid-cols-3 md:gap-6 dark:border-neutral-700 dark:bg-neutral-800"
               >
                 <div
                   className={`order-1 ${textOrder} relative overflow-hidden rounded-2xl p-5 sm:p-6 md:col-span-2`}
@@ -119,16 +119,16 @@ export default function PageDuLich() {
                 </div>
 
                 <div
-                  className={`order-2 ${qrOrder} flex items-center justify-center rounded-2xl border border-orange-100 bg-white p-4 sm:p-6 md:col-span-1`}
+                  className={`order-2 ${qrOrder} flex items-center justify-center rounded-2xl border border-orange-100 bg-white p-4 sm:p-6 md:col-span-1 dark:border-neutral-600 dark:bg-neutral-700`}
                 >
                   <div className="w-full max-w-[220px] text-center sm:max-w-[260px]">
                     <img
                       src={getQrUrl(spot.mapUrl)}
                       alt={`Mã QR ${spot.name}`}
-                      className="mx-auto w-full rounded-xl border border-orange-100"
+                      className="mx-auto w-full rounded-xl border border-orange-100 dark:border-neutral-600"
                       loading="lazy"
                     />
-                    <p className="mt-3 text-sm text-neutral-600">
+                    <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-300">
                       Quét QR để mở bản đồ
                     </p>
                   </div>
