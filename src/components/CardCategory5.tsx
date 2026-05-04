@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { TaxonomyType } from "@/data/types";
 import convertNumbThousand from "@/utils/convertNumbThousand";
-import Link from "next/link";
+
 import Image from "next/image";
 
 export interface CardCategory5Props {
@@ -15,8 +15,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
 }) => {
   const { count, name, href = "/", thumbnail } = taxonomy;
   return (
-    <Link
-      href={href}
+    <div
       className={`nc-CardCategory5 flex flex-col ${className}`}
       data-nc-id="CardCategory5"
     >
@@ -44,7 +43,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
           {convertNumbThousand(count)} properties
         </span>
       </div>
-    </Link>
+    </div>
   );
 };
 
