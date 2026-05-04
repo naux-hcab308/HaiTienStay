@@ -1,4 +1,4 @@
-import { NavItemType } from "@/shared/Navigation/NavigationItem";
+﻿import { NavItemType } from "@/shared/Navigation/NavigationItem";
 import ncNanoId from "@/utils/ncNanoId";
 
 const blogChildren: NavItemType[] = [
@@ -27,8 +27,8 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/listing-stay-detail",
-    name: "Đặt phòng",
+    href: "/du-lich",
+    name: "Du lịch",
   },
   {
     id: ncNanoId(),
@@ -62,8 +62,8 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/listing-stay-detail",
-    name: "Đặt phòng",
+    href: "/du-lich",
+    name: "Du lịch",
   },
   {
     id: ncNanoId(),

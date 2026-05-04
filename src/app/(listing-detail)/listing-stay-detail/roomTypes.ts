@@ -1,4 +1,4 @@
-export interface RoomType {
+﻿export interface RoomType {
   id: string;
   label: string;
   sucChua: string;

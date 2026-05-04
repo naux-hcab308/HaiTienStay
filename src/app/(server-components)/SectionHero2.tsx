@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+﻿import React, { FC } from "react";
 import Image from "next/image";
 import imagePng from "@/images/haitien/hero-home.jpg";
 
@@ -34,19 +34,16 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", children }) => {
         <Image fill className="object-cover" src={imagePng} alt="hero" />
       </div>
       <div className="relative hidden sm:block py-14 lg:py-20">
-        <div className="relative inline-flex w-[min(60vw,760px)]">
+        <div className="relative inline-flex w-[min(38vw,620px)]">
           <div className="absolute inset-y-0 right-0 left-[calc(50%-50vw)] bg-primary-500" />
           <div className="relative flex min-h-[360px] w-full flex-shrink-0 flex-col items-center justify-center px-8 text-white sm:min-h-[400px] sm:px-10 lg:min-h-[440px] lg:px-12">
             {children ? (
               children
             ) : (
-              <h2 className="text-center font-semibold !leading-[120%] text-4xl md:text-5xl xl:text-6xl">
+              <h2 className="mx-auto w-full max-w-[12ch] text-center font-medium leading-[1.15] text-4xl md:text-5xl xl:text-[56px] text-white">
                 <span className="block italic">-YARA-</span>
-                <span className="block">
-                  Góc nhỏ yên
-                  <span className="ml-2 inline-block">lành</span>
-                </span>
-                <span className="block">tại Hải Tiến</span>
+                <span className="block whitespace-nowrap">Góc nhỏ yên lành</span>
+                <span className="block whitespace-nowrap">tại Hải Tiến</span>
               </h2>
             )}
           </div>
@@ -57,4 +54,3 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "", children }) => {
 };
 
 export default SectionHero2;
-
