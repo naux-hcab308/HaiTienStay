@@ -1,4 +1,19 @@
+import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ),
+  title: "Yara Homestay – Hải Tiến",
+  description: "Góc nhỏ yên lành tại Hải Tiến",
+  icons: {
+    icon: "/haitien/logo.jpg",
+    shortcut: "/haitien/logo.jpg",
+    apple: "/haitien/logo.jpg",
+  },
+};
+
 import SiteHeader from "./(client-components)/(Header)/SiteHeader";
 import ClientCommons from "./ClientCommons";
 import "./globals.css";
