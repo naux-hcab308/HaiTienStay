@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import {
@@ -6,7 +6,6 @@ import {
   addNews,
   updateNews,
   deleteNews,
-  getNewsEventName,
   NewsRecord,
   NewsStatus,
 } from "@/utils/newsStorage";
@@ -24,7 +23,6 @@ export default function AdminNewsPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  // Form states
   const [title, setTitle] = useState("");
   const [coverImage, setCoverImage] = useState("");
   const [fbLink, setFbLink] = useState("");
@@ -92,6 +90,7 @@ export default function AdminNewsPage() {
     } else {
       await addNews({ title, coverImage, fbLink, content, status });
     }
+
     resetForm();
     fetchPosts();
   };
@@ -112,18 +111,18 @@ export default function AdminNewsPage() {
     });
 
   return (
-    <div className="container py-16 space-y-12">
+    <div className="container space-y-12 py-16">
       <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
         Quản lý Tin tức & Sự kiện
       </h1>
 
-      {/* Form thêm/sửa bài viết */}
-      <section className="bg-neutral-50 dark:bg-neutral-800 p-8 rounded-3xl border border-neutral-200 dark:border-neutral-700">
-        <h2 className="text-2xl font-semibold mb-6">
+      <section className="rounded-3xl border border-neutral-200 bg-neutral-50 p-8 dark:border-neutral-700 dark:bg-neutral-800">
+        <h2 className="mb-6 text-2xl font-semibold">
           {isEditing ? "Chỉnh sửa bài viết" : "Thêm bài viết mới"}
         </h2>
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="md:col-span-2 space-y-2">
+
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="space-y-2 md:col-span-2">
             <Label>Tiêu đề bài viết (*)</Label>
             <Input
               value={title}
@@ -134,7 +133,7 @@ export default function AdminNewsPage() {
           </div>
 
           <div className="space-y-2">
-            <Label>Link Ảnh bìa</Label>
+            <Label>Link ảnh bìa</Label>
             <Input
               value={coverImage}
               onChange={(e) => setCoverImage(e.target.value)}
@@ -143,7 +142,7 @@ export default function AdminNewsPage() {
           </div>
 
           <div className="space-y-2">
-            <Label>Link bài viết Facebook (Tuỳ chọn)</Label>
+            <Label>Link bài viết Facebook (Tùy chọn)</Label>
             <Input
               value={fbLink}
               onChange={(e) => setFbLink(e.target.value)}
@@ -151,36 +150,36 @@ export default function AdminNewsPage() {
             />
           </div>
 
-          <div className="md:col-span-2 space-y-2">
+          <div className="space-y-2 md:col-span-2">
             <Label>Nội dung (*)</Label>
             <Textarea
               rows={8}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="Nhập nội dung bài viết. Bạn có thể sử dụng các đoạn văn bản cách nhau bởi phím Enter..."
+              placeholder="Nhập nội dung bài viết. Bạn có thể xuống dòng bằng phím Enter..."
               required
             />
           </div>
 
-          <div className="md:col-span-2 flex items-center justify-between mt-4">
-            <label className="flex items-center space-x-3 cursor-pointer">
+          <div className="mt-4 flex items-center justify-between md:col-span-2">
+            <label className="flex cursor-pointer items-center space-x-3">
               <input
                 type="checkbox"
-                className="form-checkbox h-5 w-5 text-primary-6000 rounded border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 focus:ring-primary-6000"
+                className="form-checkbox h-5 w-5 rounded border-neutral-300 text-primary-6000 focus:ring-primary-6000 dark:border-neutral-700 dark:bg-neutral-900"
                 checked={status === "published"}
                 onChange={(e) => setStatus(e.target.checked ? "published" : "draft")}
               />
-              <span className="text-neutral-700 dark:text-neutral-300 font-medium">
-                Đăng bài ngay lập tức (Nếu bỏ tick sẽ lưu dạng Bản nháp)
+              <span className="font-medium text-neutral-700 dark:text-neutral-300">
+                Đăng bài ngay lập tức (nếu bỏ tick sẽ lưu dạng Bản nháp)
               </span>
             </label>
 
-            <div className="space-x-3 flex">
+            <div className="flex space-x-3">
               {isEditing && (
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="px-6 py-3 border border-neutral-300 dark:border-neutral-6000 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+                  className="rounded-xl border border-neutral-300 px-6 py-3 transition-colors hover:bg-neutral-100 dark:border-neutral-6000 dark:hover:bg-neutral-700"
                 >
                   Hủy
                 </button>
@@ -193,34 +192,33 @@ export default function AdminNewsPage() {
         </form>
       </section>
 
-      {/* Danh sách bài viết */}
       <section>
-        <h2 className="text-2xl font-semibold mb-6 flex items-center justify-between">
+        <h2 className="mb-6 flex items-center justify-between text-2xl font-semibold">
           <span>Danh sách bài đăng ({posts.length})</span>
         </h2>
-        
+
         {posts.length === 0 ? (
           <p className="text-neutral-500">Chưa có bài viết nào.</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[800px]">
+            <table className="min-w-[800px] w-full border-collapse text-left">
               <thead>
-                <tr className="bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-700">
-                  <th className="p-4 font-semibold w-1/3">Tiêu đề</th>
+                <tr className="border-b border-neutral-200 bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800">
+                  <th className="w-1/3 p-4 font-semibold">Tiêu đề</th>
                   <th className="p-4 font-semibold">Trạng thái</th>
                   <th className="p-4 font-semibold">Ngày tạo</th>
-                  <th className="p-4 font-semibold text-right">Hành động</th>
+                  <th className="p-4 text-right font-semibold">Hành động</th>
                 </tr>
               </thead>
               <tbody>
                 {posts.map((post) => (
-                  <tr key={post.id} className="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors">
+                  <tr key={post.id} className="border-b border-neutral-200 transition-colors hover:bg-neutral-50 dark:border-neutral-700 dark:hover:bg-neutral-800/50">
                     <td className="p-4">
-                      <div className="font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2">
+                      <div className="line-clamp-2 font-medium text-neutral-900 dark:text-neutral-100">
                         {post.title}
                       </div>
                       {post.fbLink && (
-                        <a href={post.fbLink} target="_blank" rel="noreferrer" className="text-xs text-blue-500 hover:underline mt-1 block">
+                        <a href={post.fbLink} target="_blank" rel="noreferrer" className="mt-1 block text-xs text-blue-500 hover:underline">
                           [Có Link FB]
                         </a>
                       )}
@@ -228,7 +226,7 @@ export default function AdminNewsPage() {
                     <td className="p-4">
                       <button
                         onClick={() => toggleStatus(post)}
-                        className={`px-3 py-1 text-xs rounded-full font-medium ${
+                        className={`rounded-full px-3 py-1 text-xs font-medium ${
                           post.status === "published"
                             ? "bg-green-100 text-green-800 hover:bg-green-200"
                             : "bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
@@ -238,16 +236,16 @@ export default function AdminNewsPage() {
                       </button>
                     </td>
                     <td className="p-4 text-sm text-neutral-500">{formatDate(post.createdAt)}</td>
-                    <td className="p-4 text-right space-x-2">
+                    <td className="space-x-2 p-4 text-right">
                       <button
                         onClick={() => handleEdit(post)}
-                        className="text-blue-600 hover:text-blue-800 font-medium text-sm px-2 py-1"
+                        className="px-2 py-1 text-sm font-medium text-blue-600 hover:text-blue-800"
                       >
                         Sửa
                       </button>
                       <button
                         onClick={() => handleDelete(post.id)}
-                        className="text-red-600 hover:text-red-800 font-medium text-sm px-2 py-1"
+                        className="px-2 py-1 text-sm font-medium text-red-600 hover:text-red-800"
                       >
                         Xóa
                       </button>

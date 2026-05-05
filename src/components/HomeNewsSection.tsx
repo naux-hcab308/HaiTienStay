@@ -46,7 +46,10 @@ export default function HomeNewsSection({ className = "" }: HomeNewsSectionProps
         </div>
       ) : (
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {news.map((item) => (
+          {news.map((item) => {
+            const title = (item.title || "").normalize("NFC");
+            const summary = (item.summary || "").normalize("NFC");
+            return (
             <article
               key={item.slug}
               className="group flex flex-col overflow-hidden rounded-3xl border border-neutral-200 bg-white transition-shadow hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-900"
@@ -56,7 +59,7 @@ export default function HomeNewsSection({ className = "" }: HomeNewsSectionProps
                   {item.coverImage ? (
                     <img
                       src={item.coverImage}
-                      alt={item.title}
+                      alt={title}
                       className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   ) : (
@@ -71,14 +74,15 @@ export default function HomeNewsSection({ className = "" }: HomeNewsSectionProps
                   {formatDate(item.createdAt)}
                 </span>
                 <h3 className="mt-2 line-clamp-2 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                  <Link href={`/news/${item.slug}`}>{item.title}</Link>
+                  <Link href={`/news/${item.slug}`}>{title}</Link>
                 </h3>
                 <p className="mt-3 line-clamp-3 text-sm text-neutral-600 dark:text-neutral-400">
-                  {item.summary}
+                  {summary}
                 </p>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       )}
 

@@ -1,9 +1,9 @@
-import { supabase } from "./supabaseClient";
+﻿import { supabase } from "./supabaseClient";
 
 export type NewsStatus = "draft" | "published";
 
 export interface NewsRecord {
-  id: string; // uuid
+  id: string;
   slug: string;
   title: string;
   content: string;
@@ -14,7 +14,8 @@ export interface NewsRecord {
   createdAt: string;
 }
 
-// Generate a URL-friendly slug from title
+const normalizeVietnameseText = (value: string) => (value || "").normalize("NFC").trim();
+
 const generateSlug = (title: string): string => {
   return title
     .toLowerCase()
@@ -27,17 +28,12 @@ const generateSlug = (title: string): string => {
     .replace(/^-+|-+$/g, "");
 };
 
-// Auto-generate summary from content
 const generateSummary = (content: string, length = 150): string => {
   if (!content) return "";
   const plainText = content.replace(/<[^>]+>/g, "").trim();
   if (plainText.length <= length) return plainText;
   return plainText.substring(0, length) + "...";
 };
-
-// -------------------------------------------------------------
-// Database Operations (Async)
-// -------------------------------------------------------------
 
 export async function getAllNews(): Promise<NewsRecord[]> {
   const { data, error } = await supabase
@@ -50,7 +46,6 @@ export async function getAllNews(): Promise<NewsRecord[]> {
     return [];
   }
 
-  // Map snake_case from DB to camelCase for frontend
   return (data || []).map((row) => ({
     id: row.id,
     slug: row.slug,
@@ -117,17 +112,20 @@ export async function getNewsBySlug(slug: string): Promise<NewsRecord | null> {
 export async function addNews(
   post: Omit<NewsRecord, "id" | "slug" | "summary" | "createdAt">
 ): Promise<boolean> {
-  const baseSlug = generateSlug(post.title) || "tin-tuc";
+  const safeTitle = normalizeVietnameseText(post.title);
+  const safeContent = normalizeVietnameseText(post.content);
+  const safeFbLink = (post.fbLink || "").trim();
+  const baseSlug = generateSlug(safeTitle) || "tin-tuc";
   const slug = `${baseSlug}-${Date.now().toString().slice(-6)}`;
-  const summary = generateSummary(post.content);
+  const summary = generateSummary(safeContent);
 
   const { error } = await supabase.from("news").insert([
     {
       slug,
-      title: post.title,
-      content: post.content,
+      title: safeTitle,
+      content: safeContent,
       cover_image: post.coverImage,
-      fb_link: post.fbLink,
+      fb_link: safeFbLink,
       summary,
       status: post.status,
     },
@@ -137,6 +135,7 @@ export async function addNews(
     console.error("Error adding news:", error);
     return false;
   }
+
   return true;
 }
 
@@ -145,18 +144,18 @@ export async function updateNews(
   updates: Partial<Omit<NewsRecord, "id" | "slug" | "createdAt">>
 ): Promise<boolean> {
   const dbUpdates: any = {};
-  if (updates.title !== undefined) dbUpdates.title = updates.title;
+  if (updates.title !== undefined) dbUpdates.title = normalizeVietnameseText(updates.title);
   if (updates.content !== undefined) {
-    dbUpdates.content = updates.content;
-    dbUpdates.summary = generateSummary(updates.content);
+    const safeContent = normalizeVietnameseText(updates.content);
+    dbUpdates.content = safeContent;
+    dbUpdates.summary = generateSummary(safeContent);
   }
   if (updates.coverImage !== undefined) dbUpdates.cover_image = updates.coverImage;
-  if (updates.fbLink !== undefined) dbUpdates.fb_link = updates.fbLink;
+  if (updates.fbLink !== undefined) dbUpdates.fb_link = (updates.fbLink || "").trim();
   if (updates.status !== undefined) dbUpdates.status = updates.status;
 
-  // Optionally update slug if title changed significantly
   if (updates.title) {
-    const baseSlug = generateSlug(updates.title);
+    const baseSlug = generateSlug(normalizeVietnameseText(updates.title));
     dbUpdates.slug = `${baseSlug}-${Date.now().toString().slice(-6)}`;
   }
 
@@ -166,6 +165,7 @@ export async function updateNews(
     console.error("Error updating news:", error);
     return false;
   }
+
   return true;
 }
 
@@ -176,12 +176,10 @@ export async function deleteNews(id: string): Promise<boolean> {
     console.error("Error deleting news:", error);
     return false;
   }
+
   return true;
 }
 
-// -------------------------------------------------------------
-// Legacy LocalStorage Event (Not used with Supabase, kept for compatibility if needed)
-// -------------------------------------------------------------
 export const NEWS_EVENT = "haitienstay_news_changed";
 export function getNewsEventName() {
   return NEWS_EVENT;

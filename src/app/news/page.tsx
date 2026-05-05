@@ -1,9 +1,8 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { getPublishedNews, getNewsEventName, NewsRecord } from "@/utils/newsStorage";
-import Image from "next/image";
+import { getPublishedNews, NewsRecord } from "@/utils/newsStorage";
 
 export default function NewsPage() {
   const [news, setNews] = useState<NewsRecord[]>([]);
@@ -24,9 +23,9 @@ export default function NewsPage() {
     });
 
   return (
-    <main className="container py-16 lg:py-24 space-y-12">
-      <section className="text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100">
+    <main className="container space-y-12 py-16 lg:py-24">
+      <section className="mx-auto max-w-3xl text-center">
+        <h1 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 md:text-5xl">
           Tin tức & Sự kiện
         </h1>
         <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
@@ -35,49 +34,50 @@ export default function NewsPage() {
       </section>
 
       {news.length === 0 ? (
-        <div className="text-center py-20 text-neutral-500 dark:text-neutral-400">
+        <div className="py-20 text-center text-neutral-500 dark:text-neutral-400">
           Hiện tại chưa có tin tức nào được đăng.
         </div>
       ) : (
-        <section className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {news.map((item) => (
+        <section className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {news.map((item) => {
+            const title = (item.title || "").normalize("NFC");
+            const summary = (item.summary || "").normalize("NFC");
+            return (
             <article
               key={item.slug}
-              className="flex flex-col group rounded-3xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 overflow-hidden hover:shadow-xl transition-shadow"
+              className="group flex flex-col overflow-hidden rounded-3xl border border-neutral-200 bg-white transition-shadow hover:shadow-xl dark:border-neutral-700 dark:bg-neutral-800"
             >
-              <div className="relative w-full aspect-w-16 aspect-h-10 bg-neutral-200 dark:bg-neutral-700 overflow-hidden">
-                <div className="absolute inset-0 w-full h-full">
-                  {item.coverImage ? (
-                    <img
-                      src={item.coverImage}
-                      alt={item.title}
-                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-neutral-400">
-                      Chưa có ảnh bìa
-                    </div>
-                  )}
-                  <div className="absolute top-3 left-3 bg-white dark:bg-neutral-900 px-3 py-1 rounded-full text-xs font-medium text-neutral-900 dark:text-white shadow z-10">
-                    {formatDate(item.createdAt)}
+              <div className="relative w-full overflow-hidden bg-neutral-200 dark:bg-neutral-700 aspect-[16/10]">
+                {item.coverImage ? (
+                  <img
+                    src={item.coverImage}
+                    alt={title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-neutral-400">
+                    Chưa có ảnh bìa
                   </div>
+                )}
+                <div className="absolute left-3 top-3 z-10 rounded-full bg-white px-3 py-1 text-xs font-medium text-neutral-900 shadow dark:bg-neutral-900 dark:text-white">
+                  {formatDate(item.createdAt)}
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col flex-grow">
-                <h2 className="text-xl font-bold text-neutral-900 dark:text-white mb-3 line-clamp-2">
-                  {item.title}
+              <div className="flex flex-grow flex-col p-6">
+                <h2 className="mb-3 line-clamp-2 text-xl font-bold text-neutral-900 dark:text-white">
+                  {title}
                 </h2>
-                <p className="text-neutral-600 dark:text-neutral-400 mb-6 line-clamp-3 flex-grow">
-                  {item.summary}
+                <p className="mb-6 line-clamp-3 flex-grow text-neutral-600 dark:text-neutral-400">
+                  {summary}
                 </p>
                 <Link
                   href={`/news/${item.slug}`}
-                  className="inline-flex items-center text-primary-6000 hover:text-primary-700 font-semibold transition-colors"
+                  className="inline-flex items-center font-semibold text-primary-6000 transition-colors hover:text-primary-700"
                 >
                   Đọc chi tiết
                   <svg
-                    className="w-5 h-5 ml-2"
+                    className="ml-2 h-5 w-5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -92,7 +92,8 @@ export default function NewsPage() {
                 </Link>
               </div>
             </article>
-          ))}
+            );
+          })}
         </section>
       )}
     </main>
