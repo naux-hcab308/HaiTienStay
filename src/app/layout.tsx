@@ -22,6 +22,7 @@ import "@/styles/index.scss";
 import "rc-slider/assets/index.css";
 import Footer from "@/components/Footer";
 import FooterNav from "@/components/FooterNav";
+import FloatingNewsButton from "@/components/FloatingNewsButton";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
         <ClientCommons />
         <SiteHeader />
         {children}
+        <FloatingNewsButton />
         <FooterNav />
         <Footer />
       </body>
