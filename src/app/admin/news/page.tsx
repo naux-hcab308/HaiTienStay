@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import {
@@ -6,6 +6,7 @@ import {
   addNews,
   updateNews,
   deleteNews,
+  uploadNewsImage,
   NewsRecord,
   NewsStatus,
 } from "@/utils/newsStorage";
@@ -28,6 +29,7 @@ export default function AdminNewsPage() {
   const [fbLink, setFbLink] = useState("");
   const [content, setContent] = useState("");
   const [status, setStatus] = useState<NewsStatus>("published");
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -134,11 +136,47 @@ export default function AdminNewsPage() {
 
           <div className="space-y-2">
             <Label>Link ảnh bìa</Label>
-            <Input
-              value={coverImage}
-              onChange={(e) => setCoverImage(e.target.value)}
-              placeholder="https://example.com/image.jpg"
-            />
+            <div className="flex flex-col space-y-2">
+              <Input
+                value={coverImage}
+                onChange={(e) => setCoverImage(e.target.value)}
+                placeholder="Hoặc nhập link trực tiếp (https://...)"
+              />
+              <div className="flex items-center space-x-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="imageUpload"
+                  className="hidden"
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    
+                    setIsUploading(true);
+                    try {
+                      const url = await uploadNewsImage(file);
+                      if (url) {
+                        setCoverImage(url);
+                      } else {
+                        alert("Lỗi tải ảnh lên. Vui lòng thử lại!");
+                      }
+                    } catch (err) {
+                      console.error("Upload error:", err);
+                      alert("Lỗi tải ảnh lên.");
+                    } finally {
+                      setIsUploading(false);
+                      e.target.value = ''; // Reset input
+                    }
+                  }}
+                />
+                <label
+                  htmlFor="imageUpload"
+                  className="cursor-pointer rounded-lg bg-neutral-200 px-4 py-2 text-sm font-medium hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 transition-colors"
+                >
+                  {isUploading ? "Đang tải..." : "Tải ảnh từ máy tính"}
+                </label>
+              </div>
+            </div>
           </div>
 
           <div className="space-y-2">
@@ -184,7 +222,7 @@ export default function AdminNewsPage() {
                   Hủy
                 </button>
               )}
-              <ButtonPrimary type="submit">
+              <ButtonPrimary type="submit" disabled={isUploading}>
                 {isEditing ? "Lưu thay đổi" : "Thêm bài viết"}
               </ButtonPrimary>
             </div>

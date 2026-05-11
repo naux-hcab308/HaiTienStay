@@ -1,4 +1,4 @@
-﻿import { supabase } from "./supabaseClient";
+import { supabase } from "./supabaseClient";
 
 export type NewsStatus = "draft" | "published";
 
@@ -13,6 +13,31 @@ export interface NewsRecord {
   status: NewsStatus;
   createdAt: string;
 }
+
+export async function uploadNewsImage(file: File): Promise<string | null> {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Upload API error:", errorData);
+      return null;
+    }
+
+    const data = await res.json();
+    return data.url;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    return null;
+  }
+}
+
 
 const normalizeVietnameseText = (value: string) => (value || "").normalize("NFC").trim();
 
