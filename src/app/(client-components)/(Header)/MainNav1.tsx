@@ -19,14 +19,24 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
   return (
     <div className={`nc-MainNav1 relative z-10 ${className}`}>
       <div className="px-4 lg:container h-20 relative flex justify-between">
-        <div className="flex md:hidden items-center justify-between flex-1 gap-3">
+        <div className="flex md:hidden items-center justify-between flex-1 gap-3 overflow-x-auto">
           <Logo className="w-24 flex-shrink-0" />
-          <ButtonPrimary
-            className="px-4 py-2 text-sm whitespace-nowrap"
-            href={isAdmin ? "/admin/bookings" : "/listing-stay-detail"}
-          >
-            {isAdmin ? "Đơn đặt phòng" : "Đặt phòng"}
-          </ButtonPrimary>
+          <div className="flex items-center gap-2">
+            {isAdmin && (
+              <ButtonPrimary
+                className="px-4 py-2 text-sm whitespace-nowrap bg-blue-500 hover:bg-blue-600"
+                href="/admin/messages"
+              >
+                Tin nhắn
+              </ButtonPrimary>
+            )}
+            <ButtonPrimary
+              className="px-4 py-2 text-sm whitespace-nowrap"
+              href={isAdmin ? "/admin/bookings" : "/listing-stay-detail"}
+            >
+              {isAdmin ? "Đơn đặt phòng" : "Đặt phòng"}
+            </ButtonPrimary>
+          </div>
         </div>
 
         <div className="hidden md:flex justify-start flex-1 space-x-3 lg:space-x-6">
@@ -38,12 +48,22 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
           <div className="hidden xl:flex items-center space-x-2">
             <SwitchDarkMode />
             <SearchDropdown className="flex items-center" />
-            <ButtonPrimary
-              className="self-center"
-              href={isAdmin ? "/admin/bookings" : "/listing-stay-detail"}
-            >
-              {isAdmin ? "Đơn đặt phòng" : "Đặt phòng"}
-            </ButtonPrimary>
+            <div className="flex items-center gap-2 ml-2">
+              {isAdmin && (
+                <ButtonPrimary
+                  className="self-center bg-blue-500 hover:bg-blue-600"
+                  href="/admin/messages"
+                >
+                  Tin nhắn
+                </ButtonPrimary>
+              )}
+              <ButtonPrimary
+                className="self-center"
+                href={isAdmin ? "/admin/bookings" : "/listing-stay-detail"}
+              >
+                {isAdmin ? "Đơn đặt phòng" : "Đặt phòng"}
+              </ButtonPrimary>
+            </div>
             <div className="ml-2 text-center text-xs font-semibold leading-tight text-amber-700 dark:text-white">
               <span className="block">Hotline</span>
               <span className="block tracking-[0.12em]">08.33.55.57.57</span>

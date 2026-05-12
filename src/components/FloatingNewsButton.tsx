@@ -16,10 +16,10 @@ const FloatingNewsButton = () => {
 
   return (
     <div className="fixed bottom-24 md:bottom-6 right-6 z-50 flex items-end">
-      <div className="animate-bounce">
+      <div>
         <Link
           href={isAdmin ? "/admin/news" : "/news"}
-          className="flex items-center justify-center px-5 h-14 rounded-full bg-primary-6000 hover:bg-primary-700 text-white shadow-[0_0_15px_rgba(255,0,0,0.5)] transition-transform hover:scale-110 relative group animate-pulse"
+          className="flex items-center justify-center px-5 h-14 rounded-full bg-primary-6000 hover:bg-primary-700 text-white shadow-[0_0_15px_rgba(255,0,0,0.5)] transition-transform hover:scale-110 relative group"
         >
           {isAdmin && (
             <span className="absolute right-full mr-3 whitespace-nowrap bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">

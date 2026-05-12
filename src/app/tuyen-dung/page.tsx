@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const phucLoi = [
   {
@@ -201,12 +202,12 @@ export default function TuyenDungPage() {
                       </span>
                     </div>
                   </div>
-                  <a
-                    href={`mailto:haitienstayyara@gmail.com?subject=Ứng tuyển: ${vt.title}`}
+                  <Link
+                    href="/contact"
                     className="shrink-0 inline-block px-6 py-2.5 rounded-xl bg-primary-500 hover:bg-primary-600 text-white text-sm font-semibold transition-colors"
                   >
                     Ứng tuyển ngay
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Nội dung */}
