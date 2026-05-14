@@ -14,10 +14,10 @@ export default function AffiliateTracker() {
     const trackClick = async () => {
       console.log("AffiliateTracker: Bắt đầu xử lý cho mã", refCode);
       try {
-        // 1. Visitor ID
+        // 1. Visitor ID (Dùng mã ngẫu nhiên mạnh hơn)
         let visitorId = localStorage.getItem("yara_visitor_id");
         if (!visitorId) {
-          visitorId = "vis_" + Math.random().toString(36).substring(2, 15);
+          visitorId = "v_" + Date.now() + "_" + Math.random().toString(36).substring(2, 11);
           localStorage.setItem("yara_visitor_id", visitorId);
         }
         console.log("AffiliateTracker: VisitorID =", visitorId);

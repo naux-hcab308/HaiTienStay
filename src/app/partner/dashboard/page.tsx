@@ -69,6 +69,9 @@ export default function PartnerDashboardPage() {
 
   if (loading || !stats) return <div className="container py-20 text-center">Đang tải...</div>;
 
+  const totalPpcEarned = (stats.clicks || 0) * 5000;
+  const totalCommission = (stats.partner.total_earned || 0) + totalPpcEarned;
+
   return (
     <main className="container py-10 lg:py-16">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
