@@ -19,7 +19,7 @@ export async function getAffiliates(): Promise<Affiliate[]> {
     .from("affiliates")
     .select(`
       *,
-      affiliate_clicks (count)
+      affiliate_clicks:affiliate_clicks(count)
     `)
     .order("created_at", { ascending: false });
 
@@ -30,7 +30,7 @@ export async function getAffiliates(): Promise<Affiliate[]> {
 
   return (data || []).map(item => ({
     ...item,
-    click_count: item.affiliate_clicks?.[0]?.count || 0
+    click_count: (item.affiliate_clicks as any)?.[0]?.count || 0
   }));
 }
 

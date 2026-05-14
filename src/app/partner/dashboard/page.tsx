@@ -229,7 +229,7 @@ export default function PartnerDashboardPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right font-bold text-primary-600">
-                    {b.status === 'accepted' ? `+${(b.commission_amount || 50000).toLocaleString()}đ` : '-'}
+                    {b.status === 'accepted' ? `+${(b.commission_amount || 0).toLocaleString()}đ` : '-'}
                   </td>
                 </tr>
               ))

@@ -14,6 +14,15 @@ export async function createGuestRequest(payload: {
 
   const id = `REQ_${Date.now()}_${Math.random().toString(16).slice(2, 8)}`;
   
+  // Lấy mức hoa hồng của đối tác hiện tại
+  const { data: partner } = await supabase
+    .from("affiliates")
+    .select("commission_rate")
+    .eq("id", session.id)
+    .single();
+
+  const commissionAmount = partner?.commission_rate || 0;
+
   const insertData = {
     id,
     customer_name: payload.customerName,
@@ -24,7 +33,7 @@ export async function createGuestRequest(payload: {
     check_out: payload.checkOut,
     status: "pending",
     referred_by: session.ref_code,
-    // Commission sẽ được tính khi admin duyệt
+    commission_amount: commissionAmount,
   };
 
   const { error } = await supabase.from("bookings").insert([insertData]);
