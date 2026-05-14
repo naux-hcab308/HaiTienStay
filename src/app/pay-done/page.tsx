@@ -11,10 +11,15 @@ export interface PayPageProps {}
 const PayPage: FC<PayPageProps> = () => {
   const searchParams = useSearchParams();
   const bookingId = searchParams.get("bookingId") || "";
-  const booking = useMemo(
-    () => (bookingId ? getBookingById(bookingId) : null),
-    [bookingId]
-  );
+  const [booking, setBooking] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    if (bookingId) {
+      import("@/utils/bookingStorage").then((mod) => {
+        mod.getBookingById(bookingId).then(setBooking);
+      });
+    }
+  }, [bookingId]);
 
   return (
     <div className="nc-PayPage">

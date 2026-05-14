@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import type { Route } from "next";
 import React, { FormEvent, useEffect, useMemo, useState } from "react";
@@ -64,7 +64,9 @@ export default function ListingStayDetailPage() {
     router.replace((nextQuery ? `${pathname}?${nextQuery}` : pathname) as Route);
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!checkIn || !checkOut) {
       alert("Vui lòng chọn đầy đủ ngày nhận phòng và trả phòng.");
@@ -81,8 +83,8 @@ export default function ListingStayDetailPage() {
       return;
     }
 
-    const booking = addBooking({
-      status: "pending",
+    setIsSubmitting(true);
+    const booking = await addBooking({
       roomType: room.label,
       roomNo: effectiveRoomNo,
       customerName: customerName || "Khách vãng lai",
@@ -91,8 +93,13 @@ export default function ListingStayDetailPage() {
       checkOut,
       guests: Number.isNaN(guests) ? 1 : guests,
     });
+    setIsSubmitting(false);
 
-    router.push(`/checkout?bookingId=${encodeURIComponent(booking.id)}`);
+    if (booking) {
+      router.push(`/checkout?bookingId=${encodeURIComponent(booking.id)}`);
+    } else {
+      alert("Đã xảy ra lỗi khi đặt phòng. Vui lòng thử lại!");
+    }
   };
 
   return (
@@ -240,9 +247,10 @@ export default function ListingStayDetailPage() {
             />
             <button
               type="submit"
-              className="block w-full rounded-xl bg-primary-500 py-3 text-center font-semibold text-white transition-colors hover:bg-primary-600"
+              disabled={isSubmitting}
+              className="block w-full rounded-xl bg-primary-500 py-3 text-center font-semibold text-white transition-colors hover:bg-primary-600 disabled:opacity-50"
             >
-              Gửi yêu cầu đặt phòng
+              {isSubmitting ? "Đang xử lý..." : "Gửi yêu cầu đặt phòng"}
             </button>
           </form>
         </aside>

@@ -32,6 +32,9 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+import AffiliateTracker from "@/components/AffiliateTracker";
+import { Suspense } from "react";
+
 export default function RootLayout({
   children,
   params,
@@ -43,6 +46,9 @@ export default function RootLayout({
     <html lang="vi" className={poppins.className}>
       <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
         <ClientCommons />
+        <Suspense fallback={null}>
+          <AffiliateTracker />
+        </Suspense>
         <SiteHeader />
         {children}
         <FloatingNewsButton />

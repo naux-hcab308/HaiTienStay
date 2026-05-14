@@ -71,24 +71,42 @@ const Footer: React.FC = () => {
             </li>
           ))}
           {menu.id === "5" ? (
-            <li>
-              {!isAdmin ? (
+            <>
+              <li>
                 <Link
-                  href="/admin/login"
+                  href="/partner/login"
                   className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
                 >
-                  Admin
+                  Đối tác (Partner)
                 </Link>
-              ) : (
-                <button
-                  type="button"
-                  onClick={logout}
-                  className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
-                >
-                  Thoát admin
-                </button>
-              )}
-            </li>
+              </li>
+              <li>
+                {!isAdmin ? (
+                  <Link
+                    href="/admin/login"
+                    className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
+                  >
+                    Admin
+                  </Link>
+                ) : (
+                  <div className="flex flex-col space-y-4">
+                    <Link
+                      href="/admin/affiliates"
+                      className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
+                    >
+                      Quản lý Affiliate
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={logout}
+                      className="text-left text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
+                    >
+                      Thoát admin
+                    </button>
+                  </div>
+                )}
+              </li>
+            </>
           ) : null}
         </ul>
       </div>

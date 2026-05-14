@@ -48,10 +48,22 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
   const searchParams = useSearchParams();
   const bookingId = searchParams.get("bookingId") || "";
 
-  const booking = useMemo(
-    () => (bookingId ? getBookingById(bookingId) : null),
-    [bookingId]
-  );
+  const [booking, setBooking] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (bookingId) {
+      import("@/utils/bookingStorage").then((mod) => {
+        mod.getBookingById(bookingId).then((data) => {
+          setBooking(data);
+          setLoading(false);
+        });
+      });
+    } else {
+      setLoading(false);
+    }
+  }, [bookingId]);
+
   const roomPrice = booking ? ROOM_PRICE_MAP[booking.roomType] : null;
 
   const handleConfirm = () => {
@@ -61,6 +73,16 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
     }
     router.push(`/pay-done?bookingId=${encodeURIComponent(booking.id)}`);
   };
+
+  if (loading) {
+    return (
+      <main className="container mt-11 mb-24 lg:mb-32">
+        <div className="max-w-3xl mx-auto p-6 text-center">
+          <p>Đang tải thông tin...</p>
+        </div>
+      </main>
+    );
+  }
 
   if (!booking) {
     return (

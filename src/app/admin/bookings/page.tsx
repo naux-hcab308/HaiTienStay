@@ -12,7 +12,15 @@ import { isAdminAuthenticated, logoutAdmin } from "@/utils/adminAuth";
 
 export default function AdminBookingsPage() {
   const router = useRouter();
-  const [bookings, setBookings] = React.useState(getBookings());
+  const [bookings, setBookings] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  const fetchAllBookings = async () => {
+    setLoading(true);
+    const data = await getBookings();
+    setBookings(data);
+    setLoading(false);
+  };
 
   React.useEffect(() => {
     if (!isAdminAuthenticated()) {
@@ -20,13 +28,7 @@ export default function AdminBookingsPage() {
       return;
     }
 
-    const sync = () => setBookings(getBookings());
-    window.addEventListener(getBookingEventName(), sync);
-    window.addEventListener("storage", sync);
-    return () => {
-      window.removeEventListener(getBookingEventName(), sync);
-      window.removeEventListener("storage", sync);
-    };
+    fetchAllBookings();
   }, [router]);
 
   const handleLogout = () => {
@@ -36,7 +38,12 @@ export default function AdminBookingsPage() {
 
   const handleClear = () => {
     clearBookings();
-    setBookings([]);
+    fetchAllBookings();
+  };
+
+  const handleUpdateStatus = async (id: string, status: any) => {
+    await updateBookingStatus(id, status);
+    fetchAllBookings();
   };
 
   const getStatusLabel = (status?: string) => {
@@ -66,6 +73,13 @@ export default function AdminBookingsPage() {
             className="px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 text-sm"
           >
             Duyệt blog
+          </button>
+          <button
+            type="button"
+            onClick={() => router.push("/admin/affiliates")}
+            className="px-3 py-2 rounded-lg bg-primary-600 text-white text-sm"
+          >
+            Quản lý Affiliate
           </button>
           <button
             type="button"
@@ -106,7 +120,7 @@ export default function AdminBookingsPage() {
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
-                    onClick={() => updateBookingStatus(b.id, "accepted")}
+                    onClick={() => handleUpdateStatus(b.id, "accepted")}
                     className="px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 text-sm disabled:opacity-50"
                     disabled={b.status === "accepted"}
                   >
@@ -114,7 +128,7 @@ export default function AdminBookingsPage() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => updateBookingStatus(b.id, "cancelled")}
+                    onClick={() => handleUpdateStatus(b.id, "cancelled")}
                     className="px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 text-sm disabled:opacity-50"
                     disabled={b.status === "cancelled"}
                   >
